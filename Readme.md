@@ -11,5 +11,5 @@
 --------------------------------------
 
 ##Team members:
-- [Steven Wing](https://github.com/DraconianLore)
-- [Seth Marks](https://github.com/S-Marks)
+- [Steven Wing](https://draconianlore.github.io)
+- [Seth Marks](https://S-Marks.github.io)
