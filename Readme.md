@@ -5,7 +5,7 @@
 ## A full stack project built for our team final project at Lighthouse Labs. 
 ### Tech Stack:
 - **Frontend**: React-Native
-- **Backend**: Ruby on Rails
+- **Backend**: Ruby on Rails [--> github repo](https://github.com/DraconianLore/koios-backend)
 - **Database**: PostgreSQL
 
 --------------------------------------
