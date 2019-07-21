@@ -1,35 +1,53 @@
 import React from 'react';
 
-import { StyleSheet, View, TextInput, Keyboard } from 'react-native';
+import { StyleSheet, View, TextInput, Keyboard, Button } from 'react-native';
 
-export default function Login(poops) {
-    
-    const sendAgentId = (e) => {
+class Login extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { agentId: "" };
+        this.sendAgentId = this.sendAgentId.bind(this)
+    }
 
-        poops.agentLogin(e.nativeEvent.text)
+    sendAgentId = () => {
+        console.log(this.state.agentId)
+        this.props.agentLogin(this.state.agentId)
 
     }
 
-    return (
-        <View>
-            <TextInput
-                style={styles.textInput}
-                placeholder="Agent ID"
-                maxLength={2}
-                name="agInput"
-                keyboardType={"number-pad"}
-                onBlur={Keyboard.dismiss}
-                onSubmitEditing={sendAgentId}
-            />
+    render() {
+        return (
+            <View>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Agent ID"
+                    maxLength={2}
+                    name="agInput"
+                    keyboardType={"number-pad"}
+                    onBlur={Keyboard.dismiss}
+                    onSubmitEditing={this.sendAgentId}
+                    onChangeText={(agentId) => this.setState({agentId})}
+                    value={this.state.agentId}
+                />
+                <Button
+                    onPress={this.sendAgentId}
+                    title="Submit"
+                    accessibilityLabel = "do a press"
+                    color='#990000'
+                />
 
-        </View>
-    );
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
     textInput: {
         textAlign: "center",
         fontSize: 30,
-        color: '#fff'
+        color: '#eee',
+        backgroundColor: '#aaa'
     },
 });
+
+export default Login;

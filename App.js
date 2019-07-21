@@ -14,7 +14,7 @@ export default function App() {
   }
 
   const fetchData = async () => {
-    const response = await axios.get('http://192.168.88.104:3000/users/' + userId)
+    const response = await axios.get('http://192.168.88.150:3000/users/' + userId)
     setMessage(response.data.message)
     if (response.data.message.slice(0,3) === 'Wel') {
       setLoggedIn(true);
