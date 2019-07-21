@@ -1,17 +1,11 @@
 import React from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 
 export default function Header() {
     return (
-        <View style={styles.topBar}>
-            </View>
+        <View style={{ height: 20, backgroundColor: '#121212' }}>
+            <StatusBar barStyle="light-content"/>
+        </View>
     );
 }
-
-const styles = StyleSheet.create({
-    topBar: {
-        height: 20,
-        backgroundColor: '#333333',
-    },
-});

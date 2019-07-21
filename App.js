@@ -3,6 +3,7 @@ import axios from 'axios';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Header from './src/Header';
 import Login from './src/Login';
+import Main from './src/Main';
 
 export default function App() {
   const [message, setMessage] = useState("")
@@ -26,9 +27,9 @@ export default function App() {
   return (
       <View style={styles.container}>
       <Header />
+        {loggedIn && <Main/>}
         <Text style={styles.message}>{message.toUpperCase()}</Text>
         {loggedIn || <Login agentLogin={attemptLogin}/>}
-
       </View>
   );
 }
@@ -36,7 +37,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#171717',
+    backgroundColor: '#1a1a1a',
   },
   message: {
     textAlign: "center",
