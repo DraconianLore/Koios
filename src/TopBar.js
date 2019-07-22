@@ -4,18 +4,18 @@ import { StyleSheet, View, Image } from 'react-native';
 
 export default function TopBar() {
     return (
-        <View style={style.header}>
-            <View style={style.flexbox}>
+        <View style={styles.header}>
+            <View style={styles.flexbox}>
             <Image
                 source={require('./images/spud.png')}
                 style={{ width: 30, height: 30}}
             />
-            <View style={style.progress}>
+            <View style={styles.progress}>
                 <View
-                    style={style.color}
+                    style={styles.color}
                 />
                 <View
-                    style={style.empty}
+                    style={styles.empty}
                 />
             </View>
             <Image
@@ -27,7 +27,7 @@ export default function TopBar() {
     )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     flexbox: {
         display: 'flex',
         alignItems: 'center',
