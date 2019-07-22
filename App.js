@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import SwipeUpDown from 'react-native-swipe-up-down';
+import MissionLog from './src/MissionLog';
 import Header from './src/Header';
 import Login from './src/Login';
+import TopBar from './src/TopBar';
 import Main from './src/Main';
 
 export default function App() {
   const [message, setMessage] = useState("")
+  const [userId, setUserId] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
-  let userId = ''
   function attemptLogin(agentId) {
-    userId = agentId
+    setUserId(agentId)
     fetchData()
   }
 
   const fetchData = async () => {
     const response = await axios.get('http://192.168.88.150:3000/users/' + userId)
     setMessage(response.data.message)
-    if (response.data.message.slice(0,3) === 'Wel') {
+    if (response.data.message.slice(0, 3) === 'Wel') {
       setLoggedIn(true);
     }
 
@@ -25,12 +28,22 @@ export default function App() {
 
 
   return (
-      <View style={styles.container}>
+    <View style={styles.container}>
       <Header />
-        {loggedIn && <Main/>}
-        <Text style={styles.message}>{message.toUpperCase()}</Text>
-        {loggedIn || <Login agentLogin={attemptLogin}/>}
-      </View>
+      {loggedIn && <TopBar/>}
+      <Text style={styles.message}>{message.toUpperCase()}</Text>
+      {loggedIn || <Login agentLogin={attemptLogin} />}
+      <SwipeUpDown
+        itemMini={
+          <Text style={styles.viewMissions}>PREVIOUS MISSIONS</Text>
+        }
+        itemFull={
+          <MissionLog userId={userId}/> 
+        }
+        disablePressToShow={false}
+        style={{ backgroundColor: '#121212' }}
+      />
+    </View>
   );
 }
 
@@ -43,6 +56,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: '#990000',
     fontWeight: "bold",
-    marginBottom: 20,    
+    marginBottom: 20,
+  },
+  viewMissions: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#CCCCCC',
+    fontStyle: 'italic'
   }
 });
