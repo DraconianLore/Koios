@@ -39,7 +39,9 @@ const styles = StyleSheet.create({
         padding: 10,
         height: 50,
         width: '100%',
-        backgroundColor: '#121212'
+        backgroundColor: '#121212',
+        borderBottomWidth: 0.5,
+        borderBottomColor: '#a60000'
     },
 
     progress: {

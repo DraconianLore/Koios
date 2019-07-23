@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { logicalExpression } from '@babel/types';
+import { StyleSheet, View, Text, ImageBackground, Image } from 'react-native';
 
 class MissionLog extends React.Component {
     constructor(props) {
@@ -24,48 +23,66 @@ class MissionLog extends React.Component {
 
     render() {
         const missions = this.state.message.map((mission) => {
+            let typeImage =  '' 
+            let colour = '#ff0000'
             switch (mission.type) {
                 case 'photo':
-                    // logicalExpression
+                    typeImage = require('./images/photo.png')
                     break;
                 case 'encryption':
                 case 'decryption':
                     // logicalExpression
                     break;
             }
+            if (mission.result != 'FAILED') {
+                colour = '#00ff00'
+            }
+            
+            const styles = StyleSheet.create({
+                result: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: "space-evenly",
+                    flexDirection: 'row',
+                    margin: 10,
+                    height: 70,
+                    borderWidth: 1,
+                    borderColor: colour,
+                },
+                photo: {
+                    width: 30,
+                    height: 30
+                },
+                difficult: {
+                    color: '#aaa',
+                    
+                },
+                complete: {
+                    color: '#aaa'
+                },
+                solution: {
+                    color: '#aaa'
+                }
+            })
+            
             return (
-                <View key={mission.id}>
-                    <Text style={styles.words}>type: {mission.type} </Text>
-                    <Text style={styles.words}>difficulty: {mission.difficulty}</Text>
-                    <Text style={styles.words}>completed: {mission.completed}</Text>
-                    <Text style={styles.words}>result: {mission.result}</Text>
-                </View>
+                <ImageBackground source={require('./images/missionlist.jpg')}
+                    style={{width: '100%', height: '100%'}}>
+                    <View key={mission.id} style={styles.result}>
+                        <Image style={styles.photo}  source={typeImage} />
+                        <Text style={styles.difficult}>{mission.difficulty}</Text>
+                        <Text style={styles.complete}>{mission.completed} ago</Text>
+                        <Text style={styles.solution}>{mission.result}</Text>
+                    </View>
+                </ImageBackground>
 
             )
+                
         })
         return (
             <View>{missions}</View>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    badEnd: {
-        margin: 10,
-        height: 70,
-        borderWidth: 1,
-        borderColor: '#610000',
-        color: '#eee'
-    },
-    goodEnd: {
-        margin: 10,
-        height: 70,
-        borderWidth: 1,
-        borderColor: '#0a3b00',
-    },
-    words: {
-        color: '#eee'
-    }
-})
 
 export default MissionLog;

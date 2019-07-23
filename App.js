@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View } from 'react-native';
+import {LinearGradient} from 'expo-linear-gradient';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import SwipeUpDown from 'react-native-swipe-up-down';
 import MissionLog from './src/MissionLog';
 import Header from './src/Header';
@@ -29,6 +30,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <ImageBackground source={require('./src/images/background.jpg')}
+      style={{width: '100%', height: '100%'}}>
       <Header />
       {loggedIn && <TopBar/>}
       <Text style={styles.message}>{message.toUpperCase()}</Text>
@@ -40,9 +43,10 @@ export default function App() {
         itemFull={
           <MissionLog userId={userId}/> 
         }
-        disablePressToShow={false}
-        style={{ backgroundColor: '#121212' }}
-      />
+        disablePressToShow={true}
+        style={{ backgroundColor: '#000'}}
+        />
+      </ImageBackground>
     </View>
   );
 }
