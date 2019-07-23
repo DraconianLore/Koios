@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {LinearGradient} from 'expo-linear-gradient';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import SwipeUpDown from 'react-native-swipe-up-down';
 import MissionLog from './src/MissionLog';
@@ -19,7 +18,7 @@ export default function App() {
   }
 
   const fetchData = async () => {
-    const response = await axios.get('http://192.168.88.150:3000/users/' + userId)
+    const response = await axios.get('http://192.168.88.183:3000/users/' + userId)
     setMessage(response.data.message)
     if (response.data.message.slice(0, 3) === 'Wel') {
       setLoggedIn(true);
@@ -43,8 +42,9 @@ export default function App() {
         itemFull={
           <MissionLog userId={userId}/> 
         }
-        disablePressToShow={true}
+        disablePressToShow={false}
         style={{ backgroundColor: '#000'}}
+        animation="linear"
         />
       </ImageBackground>
     </View>

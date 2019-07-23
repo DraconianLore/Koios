@@ -14,7 +14,7 @@ class MissionLog extends React.Component {
 
     componentDidMount() {
         const fetchData = async () => {
-            const response = await axios.get(`http://192.168.88.150:3000/users/${this.props.userId}/missions`,
+            const response = await axios.get(`http://192.168.88.183:3000/users/${this.props.userId}/missions`,
             );
             this.setState({ message: response.data.message });
         };
@@ -23,6 +23,8 @@ class MissionLog extends React.Component {
 
     render() {
         const missions = this.state.message.map((mission) => {
+
+            console.log(mission)
             let typeImage =  '' 
             let colour = '#ff0000'
             switch (mission.type) {
@@ -66,21 +68,21 @@ class MissionLog extends React.Component {
             })
             
             return (
-                <ImageBackground source={require('./images/missionlist.jpg')}
-                    style={{width: '100%', height: '100%'}}>
-                    <View key={mission.id} style={styles.result}>
-                        <Image style={styles.photo}  source={typeImage} />
-                        <Text style={styles.difficult}>{mission.difficulty}</Text>
-                        <Text style={styles.complete}>{mission.completed} ago</Text>
-                        <Text style={styles.solution}>{mission.result}</Text>
-                    </View>
-                </ImageBackground>
+                <View key={mission.id} style={styles.result}>
+                    <Image style={styles.photo} source={typeImage} />
+                    <Text style={styles.difficult}>{mission.difficulty}</Text>
+                    <Text style={styles.complete}>{mission.completed} ago</Text>
+                    <Text style={styles.solution}>{mission.result}</Text>
+                </View>
 
             )
                 
         })
         return (
-            <View>{missions}</View>
+            <ImageBackground source={require('./images/missionlist.jpg')}
+            style={{width: '100%', height: '100%'}}>
+                <View>{missions}</View>
+            </ImageBackground>
         )
     }
 }
