@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View } from 'react-native';
 import SwipeUpDown from 'react-native-swipe-up-down';
@@ -12,25 +12,33 @@ export default function App() {
   const [message, setMessage] = useState("")
   const [userId, setUserId] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
+
   function attemptLogin(agentId) {
     setUserId(agentId)
-    fetchData()
   }
 
-  const fetchData = async () => {
-    const response = await axios.get('http://192.168.88.150:3000/users/' + userId)
-    setMessage(response.data.message)
-    if (response.data.message.slice(0, 3) === 'Wel') {
-      setLoggedIn(true);
+  useEffect( () => {
+    if (userId) {
+      const response = axios.get('http://192.168.88.104:3000/users/' + userId).then(response => {
+
+        setMessage(response.data.message)
+        if (response.data.message.slice(0, 3) === 'Wel') {
+          setLoggedIn(true);
+        }
+
+      })
     }
+  }, [userId])
 
-  }
+
+
 
 
   return (
     <View style={styles.container}>
       <Header />
-      {loggedIn && <TopBar/>}
+      {loggedIn && <TopBar />}
+      {loggedIn && <Main userId={userId}/>}
       <Text style={styles.message}>{message.toUpperCase()}</Text>
       {loggedIn || <Login agentLogin={attemptLogin} />}
       <SwipeUpDown
@@ -38,7 +46,7 @@ export default function App() {
           <Text style={styles.viewMissions}>PREVIOUS MISSIONS</Text>
         }
         itemFull={
-          <MissionLog userId={userId}/> 
+          <MissionLog userId={userId} />
         }
         disablePressToShow={false}
         style={{ backgroundColor: '#121212' }}
