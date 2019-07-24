@@ -17,11 +17,16 @@ export default function App() {
     setUserId(agentId)
   }
 
-  const fetchData = async () => {
-    const response = await axios.get('http://192.168.88.183:3000/users/' + userId)
-    setMessage(response.data.message)
-    if (response.data.message.slice(0, 3) === 'Wel') {
-      setLoggedIn(true);
+  useEffect( () => {
+    if (userId) {
+      const response = axios.get('http://192.168.88.183:3000/users/' + userId).then(response => {
+
+        setMessage(response.data.message)
+        if (response.data.message.slice(0, 3) === 'Wel') {
+          setLoggedIn(true);
+        }
+
+      })
     }
   }, [userId])
 
