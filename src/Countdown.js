@@ -1,11 +1,18 @@
 import React from 'react';
 
+import TimeBlink from './TimeBlink';
+
 import { View, Text, StyleSheet } from 'react-native';
 
 export default class Countdown extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { time: {}, seconds: props.timeLeft };
+      this.state = { 
+        time: {},
+        seconds: props.timeLeft,
+        outOfTime: false
+      };
+
       this.timer = 0;
       this.startTimer = this.startTimer.bind(this);
       this.countDown = this.countDown.bind(this);
@@ -14,6 +21,9 @@ export default class Countdown extends React.Component {
     secondsToTime(secs){
       let divisor_for_minutes = secs % (60 * 60);
       let minutes = Math.floor(divisor_for_minutes / 60);
+      if (minutes < 10) {
+        minutes = `0${minutes}`
+      }
   
       let divisor_for_seconds = divisor_for_minutes % 60;
       let seconds = Math.ceil(divisor_for_seconds);
@@ -51,6 +61,10 @@ export default class Countdown extends React.Component {
       // Check if we're at zero.
       if (seconds == 0) { 
         clearInterval(this.timer);
+        this.props.timesUp();
+        this.setState({outOfTime: true})
+        
+        
       }
     }
   
@@ -61,7 +75,10 @@ export default class Countdown extends React.Component {
         <Text style={styles.timerTitle}>
           Remaining Time:
         </Text>
-        <Text style={styles.countDown}>{this.state.time.m}:{this.state.time.s}</Text>
+        <View style={styles.timeBox}>
+        {this.state.outOfTime || <Text style={styles.countDown}>{this.state.time.m}:{this.state.time.s}</Text>}
+        {this.state.outOfTime && <TimeBlink />}
+        </View>
         </View>
       );
     }
@@ -72,6 +89,9 @@ const styles = StyleSheet.create({
       color: '#f39c12',    
       textAlign: "center"
 
+  },
+  timeBox: {
+    height: 120
   },
   countDown: {
     color: '#990000',
