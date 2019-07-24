@@ -42,7 +42,8 @@ export default class Main extends React.Component {
                     bTextColour: '#996600',
                     mainButtonColour: '#000066',
                     missionInfo: `${data.title}:\n\n"${data.message}"`,
-                    missionDescription: data.description
+                    missionDescription: data.description,
+                    missionTime: data.endTime
                 })
             }
 
