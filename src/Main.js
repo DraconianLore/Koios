@@ -18,11 +18,12 @@ export default class Main extends React.Component {
             showMission: false,
             mainButtonColour: '#660000',
             showRejectButton: false,
-            missionDescription: ''
+            missionDescription: '',
+            showTimeLeft: false
         }
+        this.outOfTime = this.outOfTime.bind(this)
     }
-
-    componentDidMount() {
+    checkMissions = () => {
         const response = axios.get('http://192.168.88.104:3000/users/' + this.state.userId + '/missions/current').then(response => {
             console.log(response.data.message)
             data = response.data.message
@@ -35,7 +36,7 @@ export default class Main extends React.Component {
                     missionInfo: `You have a new mission available.\n\nType: ${data.mType}\nDifficulty: ${data.mDifficulty}\nTime to complete: ${data.mTime} minutes.`
                 })
 
-            } else if(data.current) {
+            } else if (data.current) {
                 this.setState({
                     missionActive: true,
                     mButtonText: 'Show Mission Details',
@@ -43,12 +44,27 @@ export default class Main extends React.Component {
                     mainButtonColour: '#000066',
                     missionInfo: `${data.title}:\n\n"${data.message}"`,
                     missionDescription: data.description,
-                    missionTime: data.endTime
+                    missionTime: data.endTime,
+                    showTimeLeft: true
                 })
             }
-
-      })
+        })
     }
+    updateMissionTo(status) {
+        const response = axios.get('http://192.168.88.104:3000/users/' + this.state.userId + '/missions/' + status)
+    }
+    componentDidMount() {
+        this.checkMissions();
+    }
+
+    outOfTime = () => {
+        this.setState({
+            mButtonText: 'OK',
+            missionActive: false
+        })
+        // this.updateMissionTo('failed')
+    }
+
     render() {
         styles = StyleSheet.create({
             buttonContainer: {
@@ -77,10 +93,13 @@ export default class Main extends React.Component {
                 backgroundColor: '#cc0000',
                 margin: 5,
                 padding: 5,
-                borderRadius: 10
+                borderRadius: 10,
+                position: "absolute",
+                top: 20,
+                zIndex: 1
             },
             missionDetails: {
-                color: '#f5e653'
+                color: '#f5e653',
             },
             rejectButton: {
                 textAlign: "center",
@@ -92,7 +111,7 @@ export default class Main extends React.Component {
 
             },
             rejectText: {
-               color: '#990000'
+                color: '#990000'
 
             },
             bottomSection: {
@@ -105,7 +124,7 @@ export default class Main extends React.Component {
         });
 
         buttonPress = () => {
-            this.setState({showRejectButton: false})
+            this.setState({ showRejectButton: false })
             if (this.state.missionAvailable) {
                 this.setState({
                     showMission: true,
@@ -114,7 +133,7 @@ export default class Main extends React.Component {
                     mainButtonColour: '#006600',
                     showRejectButton: true
                 })
-                
+
             } else if (this.state.missionActive) {
                 if (this.state.showMission) {
                     this.setState({
@@ -125,19 +144,27 @@ export default class Main extends React.Component {
                         showMission: true
                     })
                 }
+            } else if (this.state.showTimeLeft) {
+                this.setState({
+                    showTimeLeft: false,
+                    mButtonText: 'No missions available',
+                })
+
+            } else {
+                this.checkMissions()
             }
         }
         rejectPress = () => {
-            
+            updateMissionTo('rejected');
         }
         return (
             <View style={styles.buttonContainer}>
                 <View style={styles.bottomSection}>
-                {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
-                    <View>
-                        <Text style={styles.rejectText}>DECLINE</Text>
-                    </View>
-                </TouchableOpacity>}
+                    {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
+                        <View>
+                            <Text style={styles.rejectText}>DECLINE</Text>
+                        </View>
+                    </TouchableOpacity>}
                 </View>
                 <TouchableOpacity onPress={buttonPress} style={styles.missionButton}>
                     <View>
@@ -149,7 +176,7 @@ export default class Main extends React.Component {
                         {this.state.missionInfo}
                     </Text>
                 </View>}
-                <Countdown timeLeft={620} />
+                {this.state.showTimeLeft && <Countdown timeLeft={12} timesUp={this.outOfTime} />}
             </View>
         )
     }
