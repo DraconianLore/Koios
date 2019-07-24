@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import SwipeUpDown from 'react-native-swipe-up-down';
 import MissionLog from './src/MissionLog';
 import Header from './src/Header';
@@ -19,7 +19,7 @@ export default function App() {
 
   useEffect( () => {
     if (userId) {
-      const response = axios.get('http://192.168.88.226:3000/users/' + userId).then(response => {
+      const response = axios.get('http://192.168.88.104:3000/users/' + userId).then(response => {
 
         setMessage(response.data.message)
         if (response.data.message.slice(0, 3) === 'Wel') {
@@ -36,9 +36,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <ImageBackground source={require('./assets/images/background.jpg')}
+      style={{width: '100%', height: '100%'}}>
       <Header />
       {loggedIn && <TopBar />}
-      {loggedIn && <Main userId={userId} />}
+      {loggedIn && <Main userId={userId}/>}
       <Text style={styles.message}>{message.toUpperCase()}</Text>
       {loggedIn || <Login agentLogin={attemptLogin} />}
       <SwipeUpDown
@@ -49,8 +51,10 @@ export default function App() {
           <MissionLog userId={userId} />
         }
         disablePressToShow={false}
-        style={{ backgroundColor: '#121212' }}
-      />
+        style={{ backgroundColor: '#000'}}
+        animation="linear"
+        />
+      </ImageBackground>
     </View>
   );
 }
