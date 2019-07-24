@@ -7,7 +7,7 @@ export default function TopBar() {
         <View style={styles.header}>
             <View style={styles.flexbox}>
             <Image
-                source={require('./images/spud.png')}
+                source={require('../assets/images/spud.png')}
                 style={{ width: 30, height: 30}}
             />
             <View style={styles.progress}>
@@ -19,7 +19,7 @@ export default function TopBar() {
                 />
             </View>
             <Image
-                source={require('./images/kanye.png')}
+                source={require('../assets/images/kanye.png')}
                 style={{ width: 30, height: 30}}
             />
             </View>
@@ -39,7 +39,9 @@ const styles = StyleSheet.create({
         padding: 10,
         height: 50,
         width: '100%',
-        backgroundColor: '#121212'
+        backgroundColor: '#121212',
+        borderBottomWidth: 0.5,
+        borderBottomColor: '#a60000'
     },
 
     progress: {
