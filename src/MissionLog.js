@@ -8,7 +8,8 @@ class MissionLog extends React.Component {
         super(props);
         this.state = {
             userId: props.userId,
-            message: []
+            message: [],
+            stamp: ''
         };
     }
 
@@ -23,63 +24,74 @@ class MissionLog extends React.Component {
 
     render() {
         const missions = this.state.message.map((mission) => {
-
-            console.log(mission)
-            let typeImage =  '' 
-            let colour = '#ff0000'
+            let typeImage =  ''
+            let stamp = ''
+            let colour = '#ff0026'
+            let bgcolour = '#52001d'
             switch (mission.type) {
                 case 'photo':
-                    typeImage = require('./images/photo.png')
+                    typeImage = require('../assets/images/photo.png')
                     break;
                 case 'encryption':
                 case 'decryption':
-                    // logicalExpression
                     break;
             }
+
             if (mission.result != 'FAILED') {
-                colour = '#00ff00'
+                colour = '#00ffa6'
+                bgcolour = '#005235'
+            }
+
+            switch (mission.result) {
+                case 'FAILED':
+                    stamp = require('../assets/images/fail.png')
+                    break;
+                case 'COMPLETE':
+                    stamp = require('../assets/images/pass.png')
+                    break;
             }
             
             const styles = StyleSheet.create({
                 result: {
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: "space-evenly",
+                    justifyContent: "space-between",
                     flexDirection: 'row',
+                    padding: 8,
                     margin: 10,
                     height: 70,
                     borderWidth: 1,
                     borderColor: colour,
+                    backgroundColor: bgcolour,
+                    opacity: 0.7
                 },
                 photo: {
                     width: 30,
                     height: 30
                 },
-                difficult: {
+                resultPart: {
                     color: '#aaa',
-                    
                 },
-                complete: {
-                    color: '#aaa'
-                },
-                solution: {
-                    color: '#aaa'
+                stampImg: {
+                    width: 30,
+                    height: 30,
+                    alignItems: 'center'
                 }
             })
             
             return (
                 <View key={mission.id} style={styles.result}>
                     <Image style={styles.photo} source={typeImage} />
-                    <Text style={styles.difficult}>{mission.difficulty}</Text>
-                    <Text style={styles.complete}>{mission.completed} ago</Text>
-                    <Text style={styles.solution}>{mission.result}</Text>
+                    <Text style={styles.resultPart}>{mission.difficulty}</Text>
+                    <Text style={styles.resultPart}>{mission.completed} ago</Text>
+                    <Image style={styles.stampImg} source={stamp}/>
                 </View>
 
             )
                 
         })
         return (
-            <ImageBackground source={require('./images/missionlist.jpg')}
+            <ImageBackground source={require('../assets/images/missionlist.jpg')}
             style={{width: '100%', height: '100%'}}>
                 <View>{missions}</View>
             </ImageBackground>

@@ -7,7 +7,7 @@ export default function TopBar() {
         <View style={styles.header}>
             <View style={styles.flexbox}>
             <Image
-                source={require('./images/spud.png')}
+                source={require('../assets/images/spud.png')}
                 style={{ width: 30, height: 30}}
             />
             <View style={styles.progress}>
@@ -19,7 +19,7 @@ export default function TopBar() {
                 />
             </View>
             <Image
-                source={require('./images/kanye.png')}
+                source={require('../assets/images/kanye.png')}
                 style={{ width: 30, height: 30}}
             />
             </View>
