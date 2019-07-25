@@ -19,7 +19,7 @@ class MissionLog extends React.Component {
 
     componentDidMount() {
         const fetchData = async () => {
-            const response = await axios.get(`${BASE_URL}:3000/users/${this.props.userId}/missions`,
+            const response = await axios.get(`${BASE_URL}:3000/users/${this.state.userId}/missions`,
             );
             this.setState({ message: response.data.message });
         };

@@ -7,7 +7,7 @@ import Header from './src/Header';
 import Login from './src/Login';
 import TopBar from './src/TopBar';
 import Main from './src/Main';
-import { BASE_URL } from 'react-native-dotenv'
+import { BASE_URL } from 'react-native-dotenv';
 
 
 export default function App() {

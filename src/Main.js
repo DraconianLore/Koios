@@ -41,6 +41,8 @@ export default class Main extends React.Component {
             } else if (data.current) {
                 this.setState({
                     missionActive: true,
+                    missionAvailable: false,
+                    showRejectButton: false,
                     mButtonText: 'Show Mission Details',
                     bTextColour: '#996600',
                     mainButtonColour: '#000066',
@@ -69,7 +71,7 @@ export default class Main extends React.Component {
     }
     updateMissionTo(status) {
         axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/' + status).then(response => {
-            this.resetPage();
+            // to be or not to be...
         })
     }
     componentDidMount() {
@@ -79,9 +81,12 @@ export default class Main extends React.Component {
     outOfTime = () => {
         this.setState({
             mButtonText: 'OK',
-            missionActive: false
+            missionActive: false,
+            missionInfo: 'MISSION FAILED\n\nYou ran out of time!',
+            showMission: true
         })
         this.updateMissionTo('failed')
+
     }
 
     render() {
@@ -146,8 +151,10 @@ export default class Main extends React.Component {
             this.setState({ showRejectButton: false })
             if (this.state.missionAvailable) {
                 if (this.state.mButtonText == 'ACCEPT') {
-                    // accept the mission - needs to be fixed
                     this.updateMissionTo('accepted')
+                    setTimeout(() => {
+                        this.checkMissions();
+                    }, 300);
                 } else {
                     this.setState({
                         showMission: true,
@@ -168,17 +175,16 @@ export default class Main extends React.Component {
                     })
                 }
             } else if (this.state.showTimeLeft) {
-                this.setState({
-                    showTimeLeft: false,
-                    mButtonText: 'No missions available',
-                })
-
+                this.resetPage();
             } else {
                 this.checkMissions()
             }
         }
         rejectPress = () => {
             this.updateMissionTo('rejected');
+            setTimeout(() => {
+                this.resetPage();
+            }, 500);
         }
         return (
             <View style={styles.buttonContainer}>
@@ -199,7 +205,7 @@ export default class Main extends React.Component {
                         {this.state.missionInfo}
                     </Text>
                 </View>}
-                {this.state.showTimeLeft && <Countdown timeLeft={111} timesUp={this.outOfTime} />}
+                {this.state.showTimeLeft && <Countdown timeLeft={11} timesUp={this.outOfTime} />}
             </View>
         )
     }
