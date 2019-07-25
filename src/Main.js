@@ -141,7 +141,7 @@ export default class Main extends React.Component {
 
             },
             bottomSection: {
-                marginBottom: 10,
+                marginBottom: 30,
                 marginTop: 10,
                 width: '30%',
                 height: '10%',

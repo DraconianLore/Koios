@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BASE_URL } from 'react-native-dotenv';
-import { StyleSheet, View, TextInput, Button, Text} from 'react-native';
+import { StyleSheet, View, TextInput, Button, Text, ImageBackground} from 'react-native';
 
 export default class MissionView extends Component {
   constructor(props) {
@@ -23,8 +23,11 @@ export default class MissionView extends Component {
 
   render() {
     return (
+      
       <View style={styles.mission}>
-        <Text>{this.state.response}</Text>
+      <ImageBackground source={require('../assets/images/matrix.gif')}
+      style={{width: '100%', height: '100%'}}>
+        <Text style={styles.textCol}>{this.state.response}</Text>
         <TextInput
           style={styles.textInput}
           placeholder="INPUT YOUR ANSWER"
@@ -39,7 +42,9 @@ export default class MissionView extends Component {
         />
          {/* form submit puts/patch to update to do verification
         rake routes to find route  */}
+                  </ImageBackground>
       </View>
+
     )
   }
 }
@@ -49,7 +54,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB'
+    backgroundColor: '#9DD6EB',
+    backgroundColor: '#000000',
+    opacity: 0.7
+  },
+  textCol: {
+    color: '#fff',
+    height: 200
   },
   textInput: {
     borderColor: '#CCCCCC',
@@ -58,6 +69,9 @@ const styles = StyleSheet.create({
     height: 100,
     fontSize: 25,
     paddingLeft: 20,
-    paddingRight: 20
+    paddingRight: 20,
+    backgroundColor: '#000000',
+    opacity: 0.7,
+    color: '#cccccc'
   }
 })

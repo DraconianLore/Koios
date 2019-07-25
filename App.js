@@ -14,6 +14,7 @@ export default function App() {
   const [message, setMessage] = useState("")
   const [userId, setUserId] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
+  const [experience, setExperience] = useState(0)
 
   function attemptLogin(agentId) {
     setUserId(agentId)
@@ -26,6 +27,8 @@ export default function App() {
         setMessage(response.data.message)
         if (response.data.message.slice(0, 3) === 'Wel') {
           setLoggedIn(true);
+          console.log('exp: ', response.data.experience)
+          setExperience(response.data.experience / 10);
         }
 
       })
@@ -40,10 +43,10 @@ export default function App() {
       <View style={styles.container}>
         <ImageBackground source={require('./assets/images/background.jpg')}
         style={{width: '100%', height: '100%'}}>
-        <Header />
-        {loggedIn && <TopBar />}
-        {loggedIn && <Main userId={userId}/>}
+        <Header/>
+        {loggedIn && <TopBar exp={experience} />}
         <Text style={styles.message}>{message.toUpperCase()}</Text>
+        {loggedIn && <Main userId={userId}/>}
         {loggedIn || <Login agentLogin={attemptLogin} />}
         {loggedIn && <SwipeUpDown
           itemMini={
