@@ -19,7 +19,7 @@ export default function App() {
 
   useEffect( () => {
     if (userId) {
-      const response = axios.get('http://192.168.88.104:3000/users/' + userId).then(response => {
+      const response = axios.get(`${BASE_URL}:3000/users/` + userId).then(response => {
 
         setMessage(response.data.message)
         if (response.data.message.slice(0, 3) === 'Wel') {
