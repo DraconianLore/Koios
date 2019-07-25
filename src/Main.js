@@ -24,6 +24,7 @@ export default class Main extends React.Component {
         }
         this.outOfTime = this.outOfTime.bind(this)
         this.checkMissions = this.checkMissions.bind(this)
+        this.updateMissionTo = this.updateMissionTo.bind(this)
     }
     checkMissions = () => {
         const response = axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/current').then(response => {
@@ -66,7 +67,7 @@ export default class Main extends React.Component {
         })
         this.updateMissionTo('failed')
     }
-
+ 
     render() {
         styles = StyleSheet.create({
             buttonContainer: {
