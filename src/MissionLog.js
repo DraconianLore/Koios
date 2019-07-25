@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import Config from 'react-native-config';
-console.log(Config)
+import { BASE_URL } from 'react-native-dotenv'
+
 
 import { StyleSheet, View, Text, ImageBackground, Image } from 'react-native';
+
+
 
 class MissionLog extends React.Component {
     constructor(props) {
@@ -11,13 +13,13 @@ class MissionLog extends React.Component {
         this.state = {
             userId: props.userId,
             message: [],
-            stamp: ''
+            stamp: '',
         };
     }
 
     componentDidMount() {
         const fetchData = async () => {
-            const response = await axios.get(`http://192.168.88.226:3000/users/${this.props.userId}/missions`,
+            const response = await axios.get(`${BASE_URL}:3000/users/${this.props.userId}/missions`,
             );
             this.setState({ message: response.data.message });
         };
