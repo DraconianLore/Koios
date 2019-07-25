@@ -23,6 +23,7 @@ export default class Main extends React.Component {
             showTimeLeft: false
         }
         this.outOfTime = this.outOfTime.bind(this)
+        this.checkMissions = this.checkMissions.bind(this)
     }
     checkMissions = () => {
         const response = axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/current').then(response => {
@@ -63,7 +64,7 @@ export default class Main extends React.Component {
             mButtonText: 'OK',
             missionActive: false
         })
-        // this.updateMissionTo('failed')
+        this.updateMissionTo('failed')
     }
 
     render() {
@@ -125,6 +126,8 @@ export default class Main extends React.Component {
         });
 
         buttonPress = () => {
+            console.log("PUSHITTOTHELIMIT")
+            
             this.setState({ showRejectButton: false })
             if (this.state.missionAvailable) {
                 this.setState({
@@ -134,7 +137,8 @@ export default class Main extends React.Component {
                     mainButtonColour: '#006600',
                     showRejectButton: true
                 })
-
+                const response = axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/accepted')
+                
             } else if (this.state.missionActive) {
                 if (this.state.showMission) {
                     this.setState({
@@ -151,12 +155,11 @@ export default class Main extends React.Component {
                     mButtonText: 'No missions available',
                 })
 
-            } else {
-                this.checkMissions()
             }
+            setTimeout(() => {this.checkMissions()}, 500)
         }
         rejectPress = () => {
-            updateMissionTo('rejected');
+            this.updateMissionTo('rejected');
         }
         return (
             <View style={styles.buttonContainer}>

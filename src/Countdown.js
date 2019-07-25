@@ -73,7 +73,7 @@ export default class Countdown extends React.Component {
       return(
         <View style={styles.countdownBox}>
         <Text style={styles.timerTitle}>
-          Remaining Time:
+          TIME REMAINING:
         </Text>
         <View style={styles.timeBox}>
         {this.state.outOfTime || <Text style={styles.countDown}>{this.state.time.m}:{this.state.time.s}</Text>}

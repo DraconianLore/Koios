@@ -6,7 +6,6 @@ import { BASE_URL } from 'react-native-dotenv'
 import { StyleSheet, View, Text, ImageBackground, Image } from 'react-native';
 
 
-
 class MissionLog extends React.Component {
     constructor(props) {
         super(props);
