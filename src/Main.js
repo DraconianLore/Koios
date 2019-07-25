@@ -24,7 +24,7 @@ export default class Main extends React.Component {
         this.outOfTime = this.outOfTime.bind(this)
     }
     checkMissions = () => {
-        const response = axios.get('http://192.168.88.104:3000/users/' + this.state.userId + '/missions/current').then(response => {
+        const response = axios.get('http://192.168.88.226:3000/users/' + this.state.userId + '/missions/current').then(response => {
             console.log(response.data.message)
             data = response.data.message
             if (data.available) {
@@ -51,7 +51,7 @@ export default class Main extends React.Component {
         })
     }
     updateMissionTo(status) {
-        const response = axios.get('http://192.168.88.104:3000/users/' + this.state.userId + '/missions/' + status)
+        const response = axios.get('http://192.168.88.226:3000/users/' + this.state.userId + '/missions/' + status)
     }
     componentDidMount() {
         this.checkMissions();

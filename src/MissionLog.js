@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Config from 'react-native-config';
+console.log(Config)
 
 import { StyleSheet, View, Text, ImageBackground, Image } from 'react-native';
 
@@ -15,7 +17,7 @@ class MissionLog extends React.Component {
 
     componentDidMount() {
         const fetchData = async () => {
-            const response = await axios.get(`http://192.168.88.104:3000/users/${this.props.userId}/missions`,
+            const response = await axios.get(`http://192.168.88.226:3000/users/${this.props.userId}/missions`,
             );
             this.setState({ message: response.data.message });
         };
