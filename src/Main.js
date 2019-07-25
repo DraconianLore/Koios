@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Countdown from './Countdown';
-import { BASE_URL } from 'react-native-dotenv'
+import Swiper from 'react-native-swiper';
+import MissionView from './MissionView';
+import { BASE_URL } from 'react-native-dotenv';
 
 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
@@ -127,7 +129,6 @@ export default class Main extends React.Component {
         });
 
         buttonPress = () => {
-            console.log("PUSHITTOTHELIMIT")
             
             this.setState({ showRejectButton: false })
             if (this.state.missionAvailable) {
@@ -163,26 +164,29 @@ export default class Main extends React.Component {
             this.updateMissionTo('rejected');
         }
         return (
-            <View style={styles.buttonContainer}>
-                <View style={styles.bottomSection}>
-                    {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
-                        <View>
-                            <Text style={styles.rejectText}>DECLINE</Text>
-                        </View>
-                    </TouchableOpacity>}
-                </View>
-                <TouchableOpacity onPress={buttonPress} style={styles.missionButton}>
-                    <View>
-                        <Text style={styles.buttonText}>{this.state.mButtonText}</Text>
+            <Swiper showsButtons={false} loop={false} showsPagination={false}>
+                <View style={styles.buttonContainer}>
+                    <View style={styles.bottomSection}>
+                        {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
+                            <View>
+                                <Text style={styles.rejectText}>DECLINE</Text>
+                            </View>
+                        </TouchableOpacity>}
                     </View>
-                </TouchableOpacity>
-                {this.state.showMission && <View style={styles.missionText}>
-                    <Text style={styles.missionDetails}>
-                        {this.state.missionInfo}
-                    </Text>
-                </View>}
-                {this.state.showTimeLeft && <Countdown timeLeft={12} timesUp={this.outOfTime} />}
-            </View>
+                    <TouchableOpacity onPress={buttonPress} style={styles.missionButton}>
+                        <View>
+                            <Text style={styles.buttonText}>{this.state.mButtonText}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    {this.state.showMission && <View style={styles.missionText}>
+                        <Text style={styles.missionDetails}>
+                            {this.state.missionInfo}
+                        </Text>
+                    </View>}
+                    {this.state.showTimeLeft && <Countdown timeLeft={120} timesUp={this.outOfTime} />}
+                </View>
+                <MissionView userId={this.state.userId}/>
+            </Swiper>
         )
     }
 }
