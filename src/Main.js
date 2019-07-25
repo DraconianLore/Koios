@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Countdown from './Countdown';
+import { BASE_URL } from 'react-native-dotenv'
 
 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
@@ -22,6 +23,7 @@ export default class Main extends React.Component {
             showTimeLeft: false
         }
         this.outOfTime = this.outOfTime.bind(this)
+        this.updateMissionTo = this.updateMissionTo.bind(this)
     }
     checkMissions = () => {
         const response = axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/current').then(response => {
@@ -155,7 +157,7 @@ export default class Main extends React.Component {
             }
         }
         rejectPress = () => {
-            updateMissionTo('rejected');
+            this.updateMissionTo('rejected');
         }
         return (
             <View style={styles.buttonContainer}>
