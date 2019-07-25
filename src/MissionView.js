@@ -8,11 +8,10 @@ export default class MissionView extends Component {
     super(props);
     this.state = { 
       userId: props.userId,
-      answer: "",
-      response: ""
+      answer: '',
+      response: ''
     }
   }
-
   buttonPress = () => {
     const response = axios.patch(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/verify?message=' + this.state.answer).then(response => {
       this.setState({
@@ -21,9 +20,12 @@ export default class MissionView extends Component {
     })
   }
 
+
+  
   render() {
     return (
       <View style={styles.mission}>
+        <Text style={styles.info}>{this.props.missionInfo}</Text>
         <Text>{this.state.response}</Text>
         <TextInput
           style={styles.textInput}
@@ -37,8 +39,6 @@ export default class MissionView extends Component {
           title = 'SUBMIT'
           onPress={this.buttonPress}
         />
-         {/* form submit puts/patch to update to do verification
-        rake routes to find route  */}
       </View>
     )
   }
@@ -59,5 +59,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingLeft: 20,
     paddingRight: 20
+  },
+  info: {
+    color: '#000'
   }
 })

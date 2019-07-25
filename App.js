@@ -38,12 +38,12 @@ export default function App() {
 
   return (
       <View style={styles.container}>
-        <ImageBackground source={require('./assets/images/background.jpg')}
+        <ImageBackground source={require('./assets/images/background.png')}
         style={{width: '100%', height: '100%'}}>
         <Header />
         {loggedIn && <TopBar />}
-        {loggedIn && <Main userId={userId}/>}
         <Text style={styles.message}>{message.toUpperCase()}</Text>
+        {loggedIn && <Main userId={userId}/>}
         {loggedIn || <Login agentLogin={attemptLogin} />}
         {loggedIn && <SwipeUpDown
           itemMini={
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#CCCCCC',
+    backgroundColor: 'transparent',
     fontStyle: 'italic'
   }
 });

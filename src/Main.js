@@ -38,7 +38,7 @@ export default class Main extends React.Component {
                     mButtonText: 'New Mission Available',
                     bTextColour: '#cc0000',
                     mainButtonColour: '#660000',
-                    missionInfo: `You have a new mission available.\n\nType: ${data.mType}\nDifficulty: ${data.mDifficulty}\nTime to complete: ${data.mTime} minutes.`
+                    missionInfo: `YOUR MISSION\n\nSHOULD YOU CHOOSE TO ACCEPT IT:\n\nType: ${data.mType}\nDifficulty: ${data.mDifficulty}\nTime to complete: ${data.mTime} minutes.`
                 })
 
             } else if (data.current) {
@@ -141,7 +141,7 @@ export default class Main extends React.Component {
 
             },
             bottomSection: {
-                marginBottom: 10,
+                marginBottom: 30,
                 marginTop: 10,
                 width: '30%',
                 height: '10%',
@@ -211,9 +211,9 @@ export default class Main extends React.Component {
                             {this.state.missionInfo}
                         </Text>
                     </View>}
-                    {this.state.showTimeLeft && <Countdown timeLeft={10} timesUp={this.outOfTime} />}
+                    {this.state.showTimeLeft && <Countdown timeLeft={120} timesUp={this.outOfTime} />}
                 </View>
-                <MissionView userId={this.state.userId} />
+                <MissionView userId={this.state.userId} missionInfo={this.state.missionInfo}/>
             </Swiper>
         )
     }
