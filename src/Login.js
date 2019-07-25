@@ -10,9 +10,7 @@ class Login extends React.Component {
     }
 
     sendAgentId = () => {
-        console.log(this.state.agentId)
         this.props.agentLogin(this.state.agentId)
-
     }
 
     render() {

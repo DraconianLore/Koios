@@ -1,7 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import { BASE_URL } from 'react-native-dotenv'
+
 
 import { StyleSheet, View, Text, ImageBackground, Image } from 'react-native';
+
+
 
 class MissionLog extends React.Component {
     constructor(props) {
@@ -9,13 +13,13 @@ class MissionLog extends React.Component {
         this.state = {
             userId: props.userId,
             message: [],
-            stamp: ''
+            stamp: '',
         };
     }
 
     componentDidMount() {
         const fetchData = async () => {
-            const response = await axios.get(`http://192.168.88.183:3000/users/${this.props.userId}/missions`,
+            const response = await axios.get(`${BASE_URL}:3000/users/${this.props.userId}/missions`,
             );
             this.setState({ message: response.data.message });
         };
@@ -24,7 +28,7 @@ class MissionLog extends React.Component {
 
     render() {
         const missions = this.state.message.map((mission) => {
-            let typeImage =  ''
+            let typeImage = require('../assets/images/spud.png')
             let stamp = ''
             let colour = '#ff0026'
             let bgcolour = '#52001d'
@@ -49,6 +53,8 @@ class MissionLog extends React.Component {
                 case 'COMPLETE':
                     stamp = require('../assets/images/pass.png')
                     break;
+                default: 
+                    console.log('############ WTF is this - ', mission.result)
             }
             
             const styles = StyleSheet.create({
