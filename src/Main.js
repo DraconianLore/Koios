@@ -66,7 +66,7 @@ export default class Main extends React.Component {
         })
         // this.updateMissionTo('failed')
     }
-
+ 
     render() {
         styles = StyleSheet.create({
             buttonContainer: {
