@@ -6,7 +6,6 @@ import { BASE_URL } from 'react-native-dotenv'
 import { StyleSheet, View, Text, ImageBackground, Image } from 'react-native';
 
 
-
 class MissionLog extends React.Component {
     constructor(props) {
         super(props);
@@ -54,7 +53,7 @@ class MissionLog extends React.Component {
                     stamp = require('../assets/images/pass.png')
                     break;
                 default: 
-                    console.log('############ WTF is this - ', mission.result)
+                    console.log('############  is this - ', mission.result)
             }
             
             const styles = StyleSheet.create({

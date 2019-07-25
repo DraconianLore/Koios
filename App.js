@@ -1,13 +1,13 @@
+import { AppRegistry, StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from 'react-native-dotenv';
 import axios from 'axios';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import SwipeUpDown from 'react-native-swipe-up-down';
 import MissionLog from './src/MissionLog';
 import Header from './src/Header';
 import Login from './src/Login';
 import TopBar from './src/TopBar';
 import Main from './src/Main';
-import { BASE_URL } from 'react-native-dotenv';
 
 
 export default function App() {
@@ -37,27 +37,27 @@ export default function App() {
 
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('./assets/images/background.jpg')}
-      style={{width: '100%', height: '100%'}}>
-      <Header />
-      {loggedIn && <TopBar />}
-      {loggedIn && <Main userId={userId}/>}
-      <Text style={styles.message}>{message.toUpperCase()}</Text>
-      {loggedIn || <Login agentLogin={attemptLogin} />}
-      <SwipeUpDown
-        itemMini={
-          <Text style={styles.viewMissions}>PREVIOUS MISSIONS</Text>
-        }
-        itemFull={
-          <MissionLog userId={userId} />
-        }
-        disablePressToShow={false}
-        style={{ backgroundColor: '#000'}}
-        animation="linear"
-        />
-      </ImageBackground>
-    </View>
+      <View style={styles.container}>
+        <ImageBackground source={require('./assets/images/background.jpg')}
+        style={{width: '100%', height: '100%'}}>
+        <Header />
+        {loggedIn && <TopBar />}
+        {loggedIn && <Main userId={userId}/>}
+        <Text style={styles.message}>{message.toUpperCase()}</Text>
+        {loggedIn || <Login agentLogin={attemptLogin} />}
+        {loggedIn && <SwipeUpDown
+          itemMini={
+            <Text style={styles.viewMissions}>PREVIOUS MISSIONS</Text>
+          }
+          itemFull={
+            <MissionLog userId={userId} />
+          }
+          disablePressToShow={false}
+          style={{ backgroundColor: '#000'}}
+          animation="linear"
+          />}
+        </ImageBackground>
+      </View>
   );
 }
 
@@ -80,3 +80,5 @@ const styles = StyleSheet.create({
     fontStyle: 'italic'
   }
 });
+
+AppRegistry.registerComponent('myproject', () => App)

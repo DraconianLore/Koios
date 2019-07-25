@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Countdown from './Countdown';
-import { BASE_URL } from 'react-native-dotenv'
+import Swiper from 'react-native-swiper';
+import MissionView from './MissionView';
+import { BASE_URL } from 'react-native-dotenv';
 
 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
@@ -23,6 +25,7 @@ export default class Main extends React.Component {
             showTimeLeft: false
         }
         this.outOfTime = this.outOfTime.bind(this)
+        this.checkMissions = this.checkMissions.bind(this)
         this.updateMissionTo = this.updateMissionTo.bind(this)
     }
     checkMissions = () => {
@@ -86,7 +89,6 @@ export default class Main extends React.Component {
             showMission: true
         })
         this.updateMissionTo('failed')
-
     }
 
     render() {
@@ -148,6 +150,7 @@ export default class Main extends React.Component {
         });
 
         buttonPress = () => {
+
             this.setState({ showRejectButton: false })
             if (this.state.missionAvailable) {
                 if (this.state.mButtonText == 'ACCEPT') {
@@ -163,6 +166,7 @@ export default class Main extends React.Component {
                         mainButtonColour: '#006600',
                         showRejectButton: true
                     })
+
                 }
             } else if (this.state.missionActive) {
                 if (this.state.showMission) {
@@ -177,7 +181,8 @@ export default class Main extends React.Component {
             } else if (this.state.showTimeLeft) {
                 this.resetPage();
             } else {
-                this.checkMissions()
+
+                setTimeout(() => { this.checkMissions() }, 500)
             }
         }
         rejectPress = () => {
@@ -187,26 +192,29 @@ export default class Main extends React.Component {
             }, 500);
         }
         return (
-            <View style={styles.buttonContainer}>
-                <View style={styles.bottomSection}>
-                    {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
-                        <View>
-                            <Text style={styles.rejectText}>DECLINE</Text>
-                        </View>
-                    </TouchableOpacity>}
-                </View>
-                <TouchableOpacity onPress={buttonPress} style={styles.missionButton}>
-                    <View>
-                        <Text style={styles.buttonText}>{this.state.mButtonText}</Text>
+            <Swiper showsButtons={false} loop={false} showsPagination={false}>
+                <View style={styles.buttonContainer}>
+                    <View style={styles.bottomSection}>
+                        {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
+                            <View>
+                                <Text style={styles.rejectText}>DECLINE</Text>
+                            </View>
+                        </TouchableOpacity>}
                     </View>
-                </TouchableOpacity>
-                {this.state.showMission && <View style={styles.missionText}>
-                    <Text style={styles.missionDetails}>
-                        {this.state.missionInfo}
-                    </Text>
-                </View>}
-                {this.state.showTimeLeft && <Countdown timeLeft={11} timesUp={this.outOfTime} />}
-            </View>
+                    <TouchableOpacity onPress={buttonPress} style={styles.missionButton}>
+                        <View>
+                            <Text style={styles.buttonText}>{this.state.mButtonText}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    {this.state.showMission && <View style={styles.missionText}>
+                        <Text style={styles.missionDetails}>
+                            {this.state.missionInfo}
+                        </Text>
+                    </View>}
+                    {this.state.showTimeLeft && <Countdown timeLeft={10} timesUp={this.outOfTime} />}
+                </View>
+                <MissionView userId={this.state.userId} />
+            </Swiper>
         )
     }
 }

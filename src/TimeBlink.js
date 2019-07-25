@@ -37,7 +37,7 @@ export default class TimeBlink extends React.Component {
 }
 const styles = StyleSheet.create({
 
-zeros: {
+  zeros: {
     color: '#990000',
     fontSize: 80,
     fontWeight: "bold",
