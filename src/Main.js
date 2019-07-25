@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Countdown from './Countdown';
+import { BASE_URL } from 'react-native-dotenv'
 
 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';

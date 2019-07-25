@@ -1,8 +1,11 @@
+import { AppRegistry, StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { BASE_URL } from 'react-native-dotenv'
 import axios from 'axios';
+import Swiper from 'react-native-swiper'
 import SwipeUpDown from 'react-native-swipe-up-down';
 import MissionLog from './src/MissionLog';
+import MissionView from './src/MissionView';
 import Header from './src/Header';
 import Login from './src/Login';
 import TopBar from './src/TopBar';
@@ -35,27 +38,30 @@ export default function App() {
 
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('./assets/images/background.jpg')}
-      style={{width: '100%', height: '100%'}}>
-      <Header />
-      {loggedIn && <TopBar />}
-      {loggedIn && <Main userId={userId}/>}
-      <Text style={styles.message}>{message.toUpperCase()}</Text>
-      {loggedIn || <Login agentLogin={attemptLogin} />}
-      <SwipeUpDown
-        itemMini={
-          <Text style={styles.viewMissions}>PREVIOUS MISSIONS</Text>
-        }
-        itemFull={
-          <MissionLog userId={userId} />
-        }
-        disablePressToShow={false}
-        style={{ backgroundColor: '#000'}}
-        animation="linear"
-        />
-      </ImageBackground>
-    </View>
+    <Swiper style={styles.wrapper} showsButtons={false} loop={false} showsPagination={false}>
+      <View style={styles.container}>
+        <ImageBackground source={require('./assets/images/background.jpg')}
+        style={{width: '100%', height: '100%'}}>
+        <Header />
+        {loggedIn && <TopBar />}
+        {loggedIn && <Main userId={userId}/>}
+        <Text style={styles.message}>{message.toUpperCase()}</Text>
+        {loggedIn || <Login agentLogin={attemptLogin} />}
+        <SwipeUpDown
+          itemMini={
+            <Text style={styles.viewMissions}>PREVIOUS MISSIONS</Text>
+          }
+          itemFull={
+            <MissionLog userId={userId} />
+          }
+          disablePressToShow={false}
+          style={{ backgroundColor: '#000'}}
+          animation="linear"
+          />
+        </ImageBackground>
+      </View>
+      <MissionView/>
+    </Swiper>
   );
 }
 
@@ -79,3 +85,4 @@ const styles = StyleSheet.create({
   }
 });
 
+AppRegistry.registerComponent('myproject', () => App)
