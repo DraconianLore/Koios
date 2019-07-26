@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: '#990000',
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   viewMissions: {
     fontSize: 18,

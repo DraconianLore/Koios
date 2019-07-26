@@ -22,7 +22,8 @@ export default class Main extends React.Component {
             mainButtonColour: '#660000',
             showRejectButton: false,
             missionDescription: '',
-            showTimeLeft: false
+            showTimeLeft: false,
+            missionType: ''
         }
         this.outOfTime = this.outOfTime.bind(this)
         this.checkMissions = this.checkMissions.bind(this)
@@ -45,7 +46,6 @@ export default class Main extends React.Component {
 
             } else if (data.current) {
                 let mEndTime = new Date(data.endTime)
-                // mEndTime = mEndTime.getTime()
                 mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) /1000
                 this.setState({
                     missionActive: true,
@@ -57,9 +57,9 @@ export default class Main extends React.Component {
                     missionInfo: `${data.title}:\n\n"${data.message}"`,
                     missionDescription: data.description,
                     missionTime: mEndTime,
-                    showTimeLeft: true
+                    showTimeLeft: true,
+                    missionType: data.mType
                 })
-                console.log(mEndTime)
             }
         })
     }
@@ -74,7 +74,8 @@ export default class Main extends React.Component {
             mainButtonColour: '#660000',
             showRejectButton: false,
             missionDescription: '',
-            showTimeLeft: false
+            showTimeLeft: false,
+            missionType: ''
         })
         this.checkMissions();
     }
@@ -168,7 +169,7 @@ export default class Main extends React.Component {
                     this.updateMissionTo('accepted')
                     setTimeout(() => {
                         this.checkMissions();
-                    }, 300);
+                    }, 500);
                 } else {
                     this.setState({
                         showMission: true,
@@ -222,17 +223,14 @@ export default class Main extends React.Component {
                             {this.state.missionInfo}
                         </Text>
                     </View>}
-<<<<<<< HEAD
-                    {this.state.showTimeLeft && <Countdown timeLeft={300} timesUp={this.outOfTime} />}
-=======
                     {this.state.showTimeLeft && <Countdown timeLeft={this.state.missionTime} timesUp={this.outOfTime} />}
->>>>>>> timer
                 </View>
                 {this.state.missionActive && <MissionView 
                     userId={this.state.userId} 
                     missionInfo={this.state.missionInfo} 
                     setMissionComplete={this.setMissionComplete}
                     missionActive={this.state.missionActive}
+                    missionType={this.state.missionType}
                 />}
             </Swiper>
         )
