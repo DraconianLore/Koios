@@ -27,11 +27,13 @@ export default class Main extends React.Component {
         this.outOfTime = this.outOfTime.bind(this)
         this.checkMissions = this.checkMissions.bind(this)
         this.updateMissionTo = this.updateMissionTo.bind(this)
+        this.setMissionComplete = this.setMissionComplete.bind(this)
     }
     checkMissions = () => {
         const response = axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/current').then(response => {
             console.log(response.data.message)
             data = response.data.message
+            this.props.updateExp(response.data.experience)
             if (data.available) {
                 this.setState({
                     missionAvailable: true,
@@ -79,6 +81,11 @@ export default class Main extends React.Component {
     }
     componentDidMount() {
         this.checkMissions();
+    }
+
+    setMissionComplete = () => {
+        this._swiper.scrollBy(-1)
+        this.resetPage()
     }
 
     outOfTime = () => {
@@ -192,7 +199,7 @@ export default class Main extends React.Component {
             }, 500);
         }
         return (
-            <Swiper showsButtons={false} loop={false} showsPagination={false}>
+            <Swiper ref={(swiper) => {this._swiper = swiper;}} showsButtons={false} loop={false} showsPagination={false}>
                 <View style={styles.buttonContainer}>
                     <View style={styles.bottomSection}>
                         {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
@@ -211,9 +218,14 @@ export default class Main extends React.Component {
                             {this.state.missionInfo}
                         </Text>
                     </View>}
-                    {this.state.showTimeLeft && <Countdown timeLeft={120} timesUp={this.outOfTime} />}
+                    {this.state.showTimeLeft && <Countdown timeLeft={300} timesUp={this.outOfTime} />}
                 </View>
-                <MissionView userId={this.state.userId} missionInfo={this.state.missionInfo}/>
+                {this.state.missionActive && <MissionView 
+                    userId={this.state.userId} 
+                    missionInfo={this.state.missionInfo} 
+                    setMissionComplete={this.setMissionComplete}
+                    missionActive={this.state.missionActive}
+                />}
             </Swiper>
         )
     }
