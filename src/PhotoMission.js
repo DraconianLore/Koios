@@ -3,6 +3,7 @@ import { Camera } from 'expo-camera';
 import React from 'react';
 import { StyleSheet, Image, View, Text, Dimensions, Button, TouchableOpacity } from 'react-native';
 import CamButtons from './CamButtons';
+import awsHelper from './awsHelper'
 
 export default class PhotoMission extends React.Component {
     constructor(props) {
@@ -14,20 +15,24 @@ export default class PhotoMission extends React.Component {
             cameraOpen: false,
             showInstructions: false,
             showImage: false,
-            camButton: true
+            camButton: true,
+            plsWait: false
         };
         this.showInfo = this.showInfo.bind(this)
     }
 setCameraType = (cameraType) => this.setState({type: cameraType})
 
 handleShortCapture = async () => {
+    
+    this.setState({plsWait: true})
     const photoData = await this.camera.takePictureAsync();
     this.setState({ 
         captures: [photoData, ...this.state.captures],
         cameraOpen: false,
         showImage: true,
         camButton: false,
-        showInstructions: false
+        showInstructions: false,
+        plsWait: false
      })
 
 };
@@ -43,6 +48,7 @@ handleShortCapture = async () => {
     async componentDidMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted' });
+        
     }
     startCamera = () => {
         this.setState({ 
@@ -59,8 +65,13 @@ handleShortCapture = async () => {
             })
         }
         const sendImage = () => {
+            let image = this.state.captures[0]
             console.log('send photo to wherever')
-        }
+            awsHelper(image.uri, (res) => {
+                console.log(res)
+                })
+            }
+                
     
         const { hasCameraPermission, type, showImage, cameraOpen, camButton } = this.state;
        if (hasCameraPermission === null) {
@@ -68,7 +79,7 @@ handleShortCapture = async () => {
         } else if (hasCameraPermission === false) {
             return <Text>No access to camera</Text>;
         } else {
-
+            
             return (
                 <View style={styles.cam}>
                     {this.state.showInstructions && <View style={styles.instructions}>
@@ -78,7 +89,9 @@ handleShortCapture = async () => {
                         style={styles.cam}
                         ref={camera => this.camera = camera}
                         type={type}
+                        autoFocus={false}
                     />}
+                    {this.state.plsWait && <Text style={styles.wait}>PLEASE WAIT</Text>}
                     {cameraOpen && <CamButtons 
                     cameraType={type}
                     setCameraType={this.setCameraType}
@@ -116,6 +129,17 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         zIndex: 1
     },
+    wait: {
+        position: "absolute",
+        bottom: '40%',
+        left: '20%',
+        backgroundColor: '#660000',
+        color: '#f5e653',
+        fontSize: 30,
+        zIndex: 4,
+        borderRadius: 2,
+        padding: 1,
+    },
     instructionText: {
         color: '#ccc',
         textAlign: "center"
@@ -151,7 +175,9 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         textAlign: "center",
         backgroundColor: '#660000',
-        color: '#f5e653'
+        color: '#f5e653',
+        borderRadius: 5,
+        padding: 2
     },
     answerNo: {
         backgroundColor: '#330000',
@@ -162,6 +188,7 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
+        borderRadius: 50
     },
     answerYes: {
         backgroundColor: '#003300',
@@ -171,7 +198,8 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        borderRadius: 50
 
     },
     buttons: {
