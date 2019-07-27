@@ -18,7 +18,7 @@ export default class PhotoMission extends React.Component {
         };
         this.showInfo = this.showInfo.bind(this)
     }
-setCameraType = (cameraType) => this.setState({cameraType})
+setCameraType = (cameraType) => this.setState({type: cameraType})
 
 handleShortCapture = async () => {
     const photoData = await this.camera.takePictureAsync();
@@ -62,7 +62,7 @@ handleShortCapture = async () => {
             console.log('send photo to wherever')
         }
     
-        const { hasCameraPermission, cameraType, showImage, cameraOpen, camButton } = this.state;
+        const { hasCameraPermission, type, showImage, cameraOpen, camButton } = this.state;
        if (hasCameraPermission === null) {
             return <View />;
         } else if (hasCameraPermission === false) {
@@ -77,9 +77,10 @@ handleShortCapture = async () => {
                     {cameraOpen && <Camera
                         style={styles.cam}
                         ref={camera => this.camera = camera}
+                        type={type}
                     />}
                     {cameraOpen && <CamButtons 
-                    cameraType={cameraType}
+                    cameraType={type}
                     setCameraType={this.setCameraType}
                     onShortCapture={this.handleShortCapture}
                     showInfo={this.showInfo}
