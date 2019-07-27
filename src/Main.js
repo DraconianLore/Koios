@@ -39,8 +39,8 @@ export default class Main extends React.Component {
                 this.setState({
                     missionAvailable: true,
                     mButtonText: 'New Mission Available',
-                    bTextColour: '#cc0000',
-                    mainButtonColour: '#660000',
+                    bTextColour: '#d90000',
+                    mainButtonColour: '#000',
                     missionInfo: `YOUR MISSION\n\nSHOULD YOU CHOOSE TO ACCEPT IT:\n\nType: ${data.mType}\nDifficulty: ${data.mDifficulty}\nTime to complete: ${data.mTime} minutes.`
                 })
 
