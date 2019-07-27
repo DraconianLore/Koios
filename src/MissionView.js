@@ -31,19 +31,7 @@ export default class MissionView extends Component {
     })
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.missionType !== this.state.missionType) {
-      let mType;
-      if (nextProps.missionType === 'encryption' || nextProps.missionType === 'decryption') {
-        mType = 'cypher'
-      } else if (nextProps.missionType === 'photo') {
-        mType = 'photo'
-      }
-      this.setState({
-        missionType: mType
-      })
-    }
-  }
+ 
   
   render() {
 
