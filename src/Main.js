@@ -14,12 +14,15 @@ export default class Main extends React.Component {
         this.state = {
             missionAvailable: false,
             missionActive: false,
-            mButtonText: 'No missions available',
-            bTextColour: '#000000',
+            mButtonText: 'NO MISSIONS AVAILABLE',
+            mTextShadow: '#000',
+            bBorderColor: '#424242',
+            bShadowColor: '#000',
+            bTextColour: '#8a8a8a',
             missionInfo: '',
             userId: this.props.userId,
             showMission: false,
-            mainButtonColour: '#660000',
+            mainButtonColour: '#141414',
             showRejectButton: false,
             missionDescription: '',
             showTimeLeft: false,
@@ -39,9 +42,12 @@ export default class Main extends React.Component {
             if (data.available) {
                 this.setState({
                     missionAvailable: true,
-                    mButtonText: 'New Mission Available',
-                    bTextColour: '#cc0000',
-                    mainButtonColour: '#660000',
+                    mButtonText: 'NEW MISSION AVAILABLE',
+                    mTextShadow: '#ff5c5c',
+                    bTextColour: '#ff0000',
+                    bBorderColor: '#ff0000',
+                    bShadowColor: '#ff4040',
+                    mainButtonColour: '#141414',
                     missionInfo: `YOUR MISSION\n\nSHOULD YOU CHOOSE TO ACCEPT IT:\n\nType: ${data.mType}\nDifficulty: ${data.mDifficulty}\nTime to complete: ${data.mTime} minutes.`
                 })
 
@@ -122,12 +128,19 @@ export default class Main extends React.Component {
                 backgroundColor: this.state.mainButtonColour,
                 alignItems: "center",
                 width: '50%',
-                borderRadius: 20,
+                borderWidth: 3,
                 justifyContent: "center",
+                shadowColor: this.state.bShadowColor,
+                shadowRadius: 10,
+                shadowOpacity: 1,
+                borderColor: this.state.bBorderColor
             },
             buttonText: {
                 color: this.state.bTextColour,
+                textShadowColor: this.mTextShadow,
+                textShadowRadius: 10,
                 fontSize: 20,
+                fontWeight: 200,
                 textAlign: "center"
             },
             missionText: {

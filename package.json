@@ -8,6 +8,11 @@
     "eject": "expo eject",
     "test": "jest"
   },
+  "rnpm" : {
+    "assets" : [
+      "./assets/fonts/"
+    ]
+  },
   "jest": {
     "preset": "jest-expo",
     "verbose": true
