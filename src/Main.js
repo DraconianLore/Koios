@@ -6,7 +6,7 @@ import MissionView from './MissionView';
 import { BASE_URL } from 'react-native-dotenv';
 
 
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -34,6 +34,7 @@ export default class Main extends React.Component {
             console.log(response.data.message)
             data = response.data.message
             this.props.updateExp(response.data.experience)
+            this.props.updateRank(response.data.rank)
             if (data.available) {
                 this.setState({
                     missionAvailable: true,
@@ -59,7 +60,6 @@ export default class Main extends React.Component {
                     missionTime: mEndTime,
                     showTimeLeft: true
                 })
-                console.log(mEndTime)
             }
         })
     }
@@ -157,6 +157,10 @@ export default class Main extends React.Component {
                 width: '30%',
                 height: '10%',
 
+            },
+            clock: {
+                height: 200,
+                width: 250
             }
         });
 
@@ -202,6 +206,17 @@ export default class Main extends React.Component {
                 this.resetPage();
             }, 500);
         }
+
+        newMission = () => {
+            console.log('#####', this.state.missionAvailable)
+            if (!this.state.missionActive && !this.state.missionAvailable) {
+                this.updateMissionTo('new')
+            }
+            setTimeout(() => {
+                this.checkMissions()
+            }, 500);
+        }
+
         return (
             <Swiper ref={(swiper) => {this._swiper = swiper;}} showsButtons={false} loop={false} showsPagination={false}>
                 <View style={styles.buttonContainer}>
@@ -222,17 +237,17 @@ export default class Main extends React.Component {
                             {this.state.missionInfo}
                         </Text>
                     </View>}
-<<<<<<< HEAD
-                    {this.state.showTimeLeft && <Countdown timeLeft={300} timesUp={this.outOfTime} />}
-=======
                     {this.state.showTimeLeft && <Countdown timeLeft={this.state.missionTime} timesUp={this.outOfTime} />}
->>>>>>> timer
+                    {this.state.showTimeLeft && <Image source={require('../assets/images/clock.gif')} style={styles.clock}/> }
+                    {this.state.showTimeLeft || <View style={{ height: 140 }} />}
+                    {this.state.showTimeLeft || <TouchableOpacity onPress={newMission}><Image source={require('../assets/images/eye.png')} style={styles.clock}/></TouchableOpacity>}
                 </View>
                 {this.state.missionActive && <MissionView 
                     userId={this.state.userId} 
                     missionInfo={this.state.missionInfo} 
                     setMissionComplete={this.setMissionComplete}
                     missionActive={this.state.missionActive}
+                    missionDescription={this.state.missionDescription}
                 />}
             </Swiper>
         )

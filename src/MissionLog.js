@@ -27,7 +27,7 @@ class MissionLog extends React.Component {
 
     render() {
         const missions = this.state.message.map((mission) => {
-            let typeImage = require('../assets/images/spud.png')
+            let typeImage = require('../assets/images/gold.png')
             let stamp = ''
             let colour = '#ff0026'
             let bgcolour = '#52001d'
@@ -37,6 +37,7 @@ class MissionLog extends React.Component {
                     break;
                 case 'encryption':
                 case 'decryption':
+                    typeImage = require('../assets/images/cipher.png')
                     break;
             }
 
@@ -53,7 +54,6 @@ class MissionLog extends React.Component {
                     stamp = require('../assets/images/pass.png')
                     break;
                 default: 
-                    console.log('############  is this - ', mission.result)
             }
             
             const styles = StyleSheet.create({

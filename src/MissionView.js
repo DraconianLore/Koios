@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BASE_URL } from 'react-native-dotenv';
-import { StyleSheet, View, TextInput, Button, Text, ImageBackground} from 'react-native';
+import { StyleSheet, View, TextInput, Button, Text, ImageBackground, TouchableOpacity} from 'react-native';
 
 export default class MissionView extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export default class MissionView extends Component {
       userId: props.userId,
       answer: '',
       response: '',
+      instructionButton: "VIEW INSTRUCTIONS"
     }
   }
 
@@ -31,6 +32,19 @@ export default class MissionView extends Component {
 
   
   render() {
+
+    showInstructions = () => {
+      if (this.state.instructionButton === this.props.missionDescription) {
+        this.setState({
+          instructionButton: "VIEW INSTRUCTIONS"
+        })
+      } else {
+        this.setState({
+          instructionButton: this.props.missionDescription
+        })
+      }
+    }
+
     return (
       
       <View style={styles.mission}>
@@ -50,6 +64,9 @@ export default class MissionView extends Component {
             title = 'SUBMIT'
             onPress={this.buttonPress}
           />
+          <TouchableOpacity onPress={showInstructions} style={styles.instructions}>
+            <Text style={styles.textCol}>{this.state.instructionButton}</Text>
+          </TouchableOpacity>
         </ImageBackground>
       </View>
 

@@ -5,12 +5,37 @@ import { StyleSheet, View, Image } from 'react-native';
 export default class TopBar extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            currentRank: '',
+            nextRank: '',
+        }
     }
-    render() {
-        
-        
 
+    render() {
+        console.log(this.props.rank)
+        switch(this.props.rank) {
+            case 0:
+                currentRank = require('../assets/images/iron.png')
+                nextRank = require('../assets/images/bronze.png')
+                break;
+            case 1:
+                currentRank = require('../assets/images/bronze.png')
+                nextRank = require('../assets/images/silver.png')
+                break;
+            case 2:
+                currentRank = require('../assets/images/silver.png')
+                nextRank = require('../assets/images/gold.png')
+                break;
+            case 3:
+                currentRank = require('../assets/images/gold.png')
+                nextRank = require('../assets/images/platinum.png')
+                break;
+            case 4:
+                currentRank = require('../assets/images/platinum.png')
+                nextRank = require('../assets/images/bronze.png')
+                break;
+        }
+        
         const styles = StyleSheet.create({
             flexbox: {
                 display: 'flex',
@@ -56,7 +81,7 @@ export default class TopBar extends React.Component {
             <View style={styles.header}>
                 <View style={styles.flexbox}>
                     <Image
-                        source={require('../assets/images/spud.png')}
+                        source={currentRank}
                         style={{ width: 30, height: 30 }}
                     />
                     <View style={styles.progress}>
@@ -68,7 +93,7 @@ export default class TopBar extends React.Component {
                         />
                     </View>
                     <Image
-                        source={require('../assets/images/kanye.png')}
+                        source={nextRank}
                         style={{ width: 30, height: 30 }}
                     />
                 </View>
