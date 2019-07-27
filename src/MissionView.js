@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { BASE_URL } from 'react-native-dotenv';
 import { StyleSheet, View, TextInput, Button, Text, ImageBackground, TouchableOpacity} from 'react-native';
+import PhotoMission from './PhotoMission';
 
 export default class MissionView extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ export default class MissionView extends Component {
       userId: props.userId,
       answer: '',
       response: '',
-      instructionButton: "VIEW INSTRUCTIONS"
+      instructionButton: "VIEW INSTRUCTIONS",
+      missionType: props.missionType
     }
   }
 
@@ -29,7 +31,19 @@ export default class MissionView extends Component {
     })
   }
 
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.missionType !== this.state.missionType) {
+      let mType;
+      if (nextProps.missionType === 'encryption' || nextProps.missionType === 'decryption') {
+        mType = 'cypher'
+      } else if (nextProps.missionType === 'photo') {
+        mType = 'photo'
+      }
+      this.setState({
+        missionType: mType
+      })
+    }
+  }
   
   render() {
 
@@ -48,7 +62,7 @@ export default class MissionView extends Component {
     return (
       
       <View style={styles.mission}>
-        <ImageBackground source={require('../assets/images/matrix.gif')}
+        {this.state.missionType === 'cypher' && <ImageBackground source={require('../assets/images/matrix.gif')}
         style={{width: '100%', height: '100%'}}>
           <Text style={styles.textCol}>{this.state.response}</Text>
           <Text style={styles.textCol}>{this.props.missionInfo}</Text>
@@ -67,7 +81,8 @@ export default class MissionView extends Component {
           <TouchableOpacity onPress={showInstructions} style={styles.instructions}>
             <Text style={styles.textCol}>{this.state.instructionButton}</Text>
           </TouchableOpacity>
-        </ImageBackground>
+        </ImageBackground>}
+        {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} missionInfo={this.props.missionInfo} />}
       </View>
 
     )

@@ -22,7 +22,8 @@ export default class Main extends React.Component {
             mainButtonColour: '#660000',
             showRejectButton: false,
             missionDescription: '',
-            showTimeLeft: false
+            showTimeLeft: false,
+            missionType: ''
         }
         this.outOfTime = this.outOfTime.bind(this)
         this.checkMissions = this.checkMissions.bind(this)
@@ -46,8 +47,7 @@ export default class Main extends React.Component {
 
             } else if (data.current) {
                 let mEndTime = new Date(data.endTime)
-                // mEndTime = mEndTime.getTime()
-                mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) /1000
+                mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) / 1000
                 this.setState({
                     missionActive: true,
                     missionAvailable: false,
@@ -58,10 +58,15 @@ export default class Main extends React.Component {
                     missionInfo: `${data.title}:\n\n"${data.message}"`,
                     missionDescription: data.description,
                     missionTime: mEndTime,
-                    showTimeLeft: true
-                })
+                    showTimeLeft: true,
+                    missionType: data.mType
+                });
+                if (data.mType === 'photo') {
+                    this.setState({ missionDescription: `Is this a picture of\n${data.title.slice(16)}\n${data.message}` })
+                }
             }
-        })
+        }
+        )
     }
     resetPage = () => {
         this.setState({
@@ -74,7 +79,8 @@ export default class Main extends React.Component {
             mainButtonColour: '#660000',
             showRejectButton: false,
             missionDescription: '',
-            showTimeLeft: false
+            showTimeLeft: false,
+            missionType: ''
         })
         this.checkMissions();
     }
@@ -172,7 +178,7 @@ export default class Main extends React.Component {
                     this.updateMissionTo('accepted')
                     setTimeout(() => {
                         this.checkMissions();
-                    }, 300);
+                    }, 500);
                 } else {
                     this.setState({
                         showMission: true,
@@ -218,7 +224,7 @@ export default class Main extends React.Component {
         }
 
         return (
-            <Swiper ref={(swiper) => {this._swiper = swiper;}} showsButtons={false} loop={false} showsPagination={false}>
+            <Swiper ref={(swiper) => { this._swiper = swiper; }} showsButtons={false} loop={false} showsPagination={false}>
                 <View style={styles.buttonContainer}>
                     <View style={styles.bottomSection}>
                         {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
@@ -242,12 +248,13 @@ export default class Main extends React.Component {
                     {this.state.showTimeLeft || <View style={{ height: 140 }} />}
                     {this.state.showTimeLeft || <TouchableOpacity onPress={newMission}><Image source={require('../assets/images/eye.png')} style={styles.clock}/></TouchableOpacity>}
                 </View>
-                {this.state.missionActive && <MissionView 
-                    userId={this.state.userId} 
-                    missionInfo={this.state.missionInfo} 
+                {this.state.missionActive && <MissionView
+                    userId={this.state.userId}
+                    missionInfo={this.state.missionInfo}
+                    missionDescription={this.state.missionDescription}
                     setMissionComplete={this.setMissionComplete}
                     missionActive={this.state.missionActive}
-                    missionDescription={this.state.missionDescription}
+                    missionType={this.state.missionType}
                 />}
             </Swiper>
         )
