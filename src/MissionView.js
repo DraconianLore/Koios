@@ -66,7 +66,7 @@ export default class MissionView extends Component {
             onPress={this.buttonPress}
           />
         </ImageBackground>}
-        {this.state.missionType === 'photo' && <PhotoMission />}
+        {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} missionInfo={this.props.missionInfo} />}
       </View>
 
     )

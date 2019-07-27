@@ -46,7 +46,7 @@ export default class Main extends React.Component {
 
             } else if (data.current) {
                 let mEndTime = new Date(data.endTime)
-                mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) /1000
+                mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) / 1000
                 this.setState({
                     missionActive: true,
                     missionAvailable: false,
@@ -59,9 +59,13 @@ export default class Main extends React.Component {
                     missionTime: mEndTime,
                     showTimeLeft: true,
                     missionType: data.mType
-                })
+                });
+                if (data.mType === 'photo') {
+                    this.setState({ missionDescription: `Is this a picture of\n${data.title.slice(16)}\n${data.message}` })
+                }
             }
-        })
+        }
+        )
     }
     resetPage = () => {
         this.setState({
@@ -204,7 +208,7 @@ export default class Main extends React.Component {
             }, 500);
         }
         return (
-            <Swiper ref={(swiper) => {this._swiper = swiper;}} showsButtons={false} loop={false} showsPagination={false}>
+            <Swiper ref={(swiper) => { this._swiper = swiper; }} showsButtons={false} loop={false} showsPagination={false}>
                 <View style={styles.buttonContainer}>
                     <View style={styles.bottomSection}>
                         {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
@@ -225,9 +229,10 @@ export default class Main extends React.Component {
                     </View>}
                     {this.state.showTimeLeft && <Countdown timeLeft={this.state.missionTime} timesUp={this.outOfTime} />}
                 </View>
-                {this.state.missionActive && <MissionView 
-                    userId={this.state.userId} 
-                    missionInfo={this.state.missionInfo} 
+                {this.state.missionActive && <MissionView
+                    userId={this.state.userId}
+                    missionInfo={this.state.missionInfo}
+                    missionDescription={this.state.missionDescription}
                     setMissionComplete={this.setMissionComplete}
                     missionActive={this.state.missionActive}
                     missionType={this.state.missionType}
