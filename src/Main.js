@@ -50,6 +50,12 @@ export default class Main extends React.Component {
             } else if (data.current) {
                 let mEndTime = new Date(data.endTime)
                 mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) / 1000
+                if (data.mType === 'photo') {
+                    data.description= `Is this a picture of\n${data.title.slice(16)}\n${data.message}` 
+                }
+                if (data.mType === 'encryption' || data.mType === 'decryption') {
+                    data.mType = 'cypher'
+                }
                 this.setState({
                     missionActive: true,
                     missionAvailable: false,
@@ -64,11 +70,9 @@ export default class Main extends React.Component {
                     showTimeLeft: true,
                     missionType: data.mType
                 });
-                if (data.mType === 'photo') {
-                    this.setState({ missionDescription: `Is this a picture of\n${data.title.slice(16)}\n${data.message}` })
-                }
+                
             }
-        }
+        } 
         )
     }
     resetPage = () => {
@@ -138,7 +142,7 @@ export default class Main extends React.Component {
                 textShadowColor: '#000',
                 textShadowRadius: 10,
                 fontSize: 20,
-                fontWeight: 200,
+                fontWeight: '200',
                 textAlign: "center"
             },
             missionText: {
@@ -231,7 +235,6 @@ export default class Main extends React.Component {
         }
 
         newMission = () => {
-            console.log('#####', this.state.missionAvailable)
             if (!this.state.missionActive && !this.state.missionAvailable) {
                 this.updateMissionTo('new')
             }
@@ -266,12 +269,12 @@ export default class Main extends React.Component {
                     {this.state.showTimeLeft || <TouchableOpacity onPress={newMission}><Image source={require('../assets/images/eye.png')} style={styles.clock}/></TouchableOpacity>}
                 </View>
                 {this.state.missionActive && <MissionView
+                    missionType={this.state.missionType}
                     userId={this.state.userId}
                     missionInfo={this.state.missionInfo}
                     missionDescription={this.state.missionDescription}
                     setMissionComplete={this.setMissionComplete}
                     missionActive={this.state.missionActive}
-                    missionType={this.state.missionType}
                 />}
             </Swiper>
         )

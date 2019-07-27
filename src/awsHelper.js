@@ -11,15 +11,15 @@ export default function uploadImage(image, cb) {
     const file = {
         // possibly change this prior to sending image in... depending on if showing doesnt work on ios
         uri: image,
-        name: `image.png`,
-        type: "image/png"
+        name: `image.jpg`,
+        type: "image/jpg"
     }
 
     const options = {
         keyPrefix: "images/",
         bucket: "koiospics",
         region: "us-west-2",
-        awsUrl: 's3.us-east-2.amazonaws.com',
+        awsUrl: 's3.us-west-2.amazonaws.com',
         accessKey: S3_ACCESS,
         secretKey: S3_SECRET,
         successActionStatus: 201
@@ -27,9 +27,15 @@ export default function uploadImage(image, cb) {
 
     console.log('###########################')
     RNS3.put(file, options).then(response => {
-        if (response.status !== 201) throw new Error("Failed to upload image to S3")
+        if (response.status !== 201) {
+            console.log(response.status, '****************************')
+            // throw new Error("Failed to upload image to S3")
+     
+    }else {
+
         console.log('#####################', response.body);
         cb(response.body.postResponse.location) // Double check this is right
+    }
     });
 
 }
