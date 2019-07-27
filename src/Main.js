@@ -15,14 +15,12 @@ export default class Main extends React.Component {
             missionAvailable: false,
             missionActive: false,
             mButtonText: 'NO MISSIONS AVAILABLE',
-            mTextShadow: '#000',
             bBorderColor: '#424242',
             bShadowColor: '#000',
             bTextColour: '#8a8a8a',
             missionInfo: '',
             userId: this.props.userId,
             showMission: false,
-            mainButtonColour: '#141414',
             showRejectButton: false,
             missionDescription: '',
             showTimeLeft: false,
@@ -43,11 +41,9 @@ export default class Main extends React.Component {
                 this.setState({
                     missionAvailable: true,
                     mButtonText: 'NEW MISSION AVAILABLE',
-                    mTextShadow: '#ff5c5c',
                     bTextColour: '#ff0000',
                     bBorderColor: '#ff0000',
                     bShadowColor: '#ff4040',
-                    mainButtonColour: '#141414',
                     missionInfo: `YOUR MISSION\n\nSHOULD YOU CHOOSE TO ACCEPT IT:\n\nType: ${data.mType}\nDifficulty: ${data.mDifficulty}\nTime to complete: ${data.mTime} minutes.`
                 })
 
@@ -58,9 +54,10 @@ export default class Main extends React.Component {
                     missionActive: true,
                     missionAvailable: false,
                     showRejectButton: false,
-                    mButtonText: 'Show Mission Details',
-                    bTextColour: '#996600',
-                    mainButtonColour: '#000066',
+                    mButtonText: 'SHOW MISSION DETAILS',
+                    bTextColour: '#1fdaff',
+                    bBorderColor: '#1fdaff',
+                    bShadowColor: '#61e5ff',
                     missionInfo: `${data.title}:\n\n"${data.message}"`,
                     missionDescription: data.description,
                     missionTime: mEndTime,
@@ -78,11 +75,12 @@ export default class Main extends React.Component {
         this.setState({
             missionAvailable: false,
             missionActive: false,
-            mButtonText: 'No missions available',
-            bTextColour: '#000000',
+            mButtonText: 'NO MISSIONS AVAILABLE',
+            bTextColour: '#8a8a8a',
+            bBorderColor: '#424242',
+            bShadowColor: '#000',
             missionInfo: '',
             showMission: false,
-            mainButtonColour: '#660000',
             showRejectButton: false,
             missionDescription: '',
             showTimeLeft: false,
@@ -125,7 +123,7 @@ export default class Main extends React.Component {
                 textAlign: "center",
                 height: '20%',
                 color: '#eee',
-                backgroundColor: this.state.mainButtonColour,
+                backgroundColor: '#141414',
                 alignItems: "center",
                 width: '50%',
                 borderWidth: 3,
@@ -137,7 +135,7 @@ export default class Main extends React.Component {
             },
             buttonText: {
                 color: this.state.bTextColour,
-                textShadowColor: this.mTextShadow,
+                textShadowColor: '#000',
                 textShadowRadius: 10,
                 fontSize: 20,
                 fontWeight: 200,
@@ -159,15 +157,20 @@ export default class Main extends React.Component {
             },
             rejectButton: {
                 textAlign: "center",
-                color: '#eee',
-                backgroundColor: '#660000',
+                color: '#ff003e',
+                backgroundColor: '#000',
                 alignItems: "center",
-                borderRadius: 20,
+                borderWidth: 2,
+                borderColor: '#ff003e',
+                shadowColor: '#ff416f',
+                shadowRadius: 3,
+                shadowOpacity: 1,
+                shadowOffset: {width: 0, height: 0},
                 justifyContent: "center"
 
             },
             rejectText: {
-                color: '#990000'
+                color: '#ff003e'
 
             },
             bottomSection: {
@@ -196,8 +199,9 @@ export default class Main extends React.Component {
                     this.setState({
                         showMission: true,
                         mButtonText: 'ACCEPT',
-                        bTextColour: '#ccc',
-                        mainButtonColour: '#006600',
+                        bTextColour: '#00ff6e',
+                        bBorderColor: '#00ff6e',
+                        bShadowColor: '#54ff9e',
                         showRejectButton: true
                     })
 

@@ -206,5 +206,4 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: '#f5e653',
     }
-}
-)
+})

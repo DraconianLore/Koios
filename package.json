@@ -8,8 +8,8 @@
     "eject": "expo eject",
     "test": "jest"
   },
-  "rnpm" : {
-    "assets" : [
+  "rnpm": {
+    "assets": [
       "./assets/fonts/"
     ]
   },
