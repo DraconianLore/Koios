@@ -7,7 +7,6 @@ import { View, TouchableWithoutFeedback, TouchableOpacity, StyleSheet } from 're
 const { Type: CameraTypes } = Camera.Constants;
 
 export default function CamButtons({
-    capturing = false,
     cameraType = CameraTypes.back,
     setCameraType,
     onShortCapture,
@@ -31,8 +30,8 @@ export default function CamButtons({
                 <Col size={2} style={styles.alignCenter}>
                     <TouchableWithoutFeedback
                         onPress={onShortCapture}>
-                        <View style={[styles.captureBtn, capturing && styles.captureBtnActive]}>
-            
+                        <View style={styles.captureBtn}>
+
                         </View>
                     </TouchableWithoutFeedback>
                 </Col>
@@ -72,11 +71,4 @@ const styles = StyleSheet.create({
         borderRadius: 60,
         borderColor: "#FFFFFF",
     },
-    captureBtnActive: {
-        width: 80,
-        height: 80,
-    },
-    
-
-
 })
