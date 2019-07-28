@@ -24,7 +24,8 @@ export default class Main extends React.Component {
             showRejectButton: false,
             missionDescription: '',
             showTimeLeft: false,
-            missionType: ''
+            missionType: '',
+            missionId: ''
         }
         this.outOfTime = this.outOfTime.bind(this)
         this.checkMissions = this.checkMissions.bind(this)
@@ -68,7 +69,8 @@ export default class Main extends React.Component {
                     missionDescription: data.description,
                     missionTime: mEndTime,
                     showTimeLeft: true,
-                    missionType: data.mType
+                    missionType: data.mType,
+                    missionId: data.missionId
                 });
                 
             }

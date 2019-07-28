@@ -3,12 +3,13 @@ import { Camera } from 'expo-camera';
 import React from 'react';
 import { StyleSheet, Image, View, Text, Dimensions, Button, TouchableOpacity } from 'react-native';
 import CamButtons from './CamButtons';
-import awsHelper from './awsHelper'
+import uploadImage from './uploadImage'
 
 export default class PhotoMission extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            userId: props.userId,
             captures: [],
             hasCameraPermission: null,
             type: Camera.Constants.Type.back,
@@ -16,28 +17,29 @@ export default class PhotoMission extends React.Component {
             showInstructions: false,
             showImage: false,
             camButton: true,
-            plsWait: false
+            plsWait: false,
+            uploading: false
         };
         this.showInfo = this.showInfo.bind(this)
     }
-setCameraType = (cameraType) => this.setState({type: cameraType})
+    setCameraType = (cameraType) => this.setState({ type: cameraType })
 
-handleShortCapture = async () => {
-    
-    this.setState({plsWait: true})
-    const photoData = await this.camera.takePictureAsync();
-    this.setState({ 
-        captures: [photoData, ...this.state.captures],
-        cameraOpen: false,
-        showImage: true,
-        camButton: false,
-        showInstructions: false,
-        plsWait: false
-     })
+    handleShortCapture = async () => {
 
-};
+        this.setState({ plsWait: true })
+        const photoData = await this.camera.takePictureAsync();
+        this.setState({
+            captures: [photoData, ...this.state.captures],
+            cameraOpen: false,
+            showImage: true,
+            camButton: false,
+            showInstructions: false,
+            plsWait: false
+        })
 
-    
+    };
+
+
     showInfo = () => {
         if (this.state.showInstructions) {
             this.setState({ showInstructions: false })
@@ -48,10 +50,10 @@ handleShortCapture = async () => {
     async componentDidMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted' });
-        
+
     }
     startCamera = () => {
-        this.setState({ 
+        this.setState({
             cameraOpen: true,
             camButton: false
         })
@@ -66,22 +68,26 @@ handleShortCapture = async () => {
         }
         const sendImage = () => {
             let image = this.state.captures[0]
+            this.setState({ uploading: true })
             console.log('send photo to wherever')
-            awsHelper(image.uri, (res) => {
+            uploadImage(image.uri, this.state.userId, (res) => {
                 console.log(res)
-                })
-            }
-                
-    
+                this.setState({ uploading: false })
+            })
+
+        }
+
+
         const { hasCameraPermission, type, showImage, cameraOpen, camButton } = this.state;
-       if (hasCameraPermission === null) {
+        if (hasCameraPermission === null) {
             return <View />;
         } else if (hasCameraPermission === false) {
             return <Text>No access to camera</Text>;
         } else {
-            
+
             return (
                 <View style={styles.cam}>
+
                     {this.state.showInstructions && <View style={styles.instructions}>
                         <Text style={styles.instructionText}>{this.props.missionInfo}</Text>
                     </View>}
@@ -92,25 +98,28 @@ handleShortCapture = async () => {
                         autoFocus={false}
                     />}
                     {this.state.plsWait && <Text style={styles.wait}>PLEASE WAIT</Text>}
-                    {cameraOpen && <CamButtons 
-                    cameraType={type}
-                    setCameraType={this.setCameraType}
-                    onShortCapture={this.handleShortCapture}
-                    showInfo={this.showInfo}
+                    {this.state.uploading && <Text style={styles.wait}>UPLOADING</Text>}
+                    {cameraOpen && <CamButtons
+                        cameraType={type}
+                        setCameraType={this.setCameraType}
+                        onShortCapture={this.handleShortCapture}
+                        showInfo={this.showInfo}
                     />}
                     {camButton && <View style={styles.activateCamera}>
                         <Button
-                        onPress={this.startCamera}
-                        title="Activate Camera"
-                        color='#990000'
+                            onPress={this.startCamera}
+                            title="Activate Camera"
+                            color='#990000'
                         />
                     </View>}
                     {showImage && <View style={styles.image}>
-                        <Image source={ this.state.captures[0]} style={{height: '90%', width: '100%'}} />
-                        <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.buttons}>NO</Text></TouchableOpacity>
-                        <Text style={styles.caption}>{this.props.missionDescription}</Text>
-                        <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.buttons}>YES</Text></TouchableOpacity>
+                        <Image source={this.state.captures[0]} style={{ height: '90%', width: '100%' }} />
+                        {this.state.uploading || <View>
+                            <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.buttons}>NO</Text></TouchableOpacity>
+                            <Text style={styles.caption}>{this.props.missionDescription}</Text>
+                            <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.buttons}>YES</Text></TouchableOpacity>
                         </View>}
+                    </View>}
                 </View>
 
             )
@@ -157,8 +166,8 @@ const styles = StyleSheet.create({
         top: 0,
         right: 0,
         bottom: 0,
-    }, 
-     image: {
+    },
+    image: {
         height: winHeight,
         width: winWidth,
         position: 'absolute',
