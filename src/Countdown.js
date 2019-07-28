@@ -63,8 +63,6 @@ export default class Countdown extends React.Component {
         clearInterval(this.timer);
         this.props.timesUp();
         this.setState({outOfTime: true})
-        
-        
       }
     }
   
@@ -72,13 +70,13 @@ export default class Countdown extends React.Component {
       this.startTimer()
       return(
         <View style={styles.countdownBox}>
-        <Text style={styles.timerTitle}>
-          TIME REMAINING:
-        </Text>
-        <View style={styles.timeBox}>
-        {this.state.outOfTime || <Text style={styles.countDown}>{this.state.time.m}:{this.state.time.s}</Text>}
-        {this.state.outOfTime && <TimeBlink />}
-        </View>
+          <View style={styles.timeBox}>
+          {this.state.outOfTime || <Text style={styles.countDown}>{this.state.time.m}:{this.state.time.s}</Text>}
+          {this.state.outOfTime && <TimeBlink />}
+          </View>
+          <Text style={styles.timerTitle}>
+            TIME REMAINING
+          </Text>
         </View>
       );
     }
@@ -86,12 +84,18 @@ export default class Countdown extends React.Component {
 
 const styles = StyleSheet.create({
   timerTitle: {
-      color: '#f39c12',    
-      textAlign: "center"
-
+      color: '#a9b9c2',    
+      textAlign: "center",
+      shadowColor: '#000',
+      fontWeight: '200',
+      shadowRadius: 10,
+      shadowOpacity: 1
   },
   timeBox: {
-    height: 120
+    height: 100,
+    shadowColor: '#000',
+    shadowRadius: 10,
+    shadowOpacity: 1
   },
   countDown: {
     color: '#990000',

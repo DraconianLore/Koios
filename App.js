@@ -56,7 +56,7 @@ export default function App() {
           {loggedIn || <Login agentLogin={attemptLogin} />}
           {loggedIn && <SwipeUpDown
             itemMini={
-              <Text style={styles.viewMissions}>PREVIOUS MISSIONS</Text>
+              <Text style={styles.viewMissions}>P R E V I O U S  M I S S I O N S</Text>
             }
             itemFull={
               <MissionLog userId={userId} />
@@ -77,13 +77,14 @@ const styles = StyleSheet.create({
   },
   message: {
     textAlign: "center",
-    color: '#990000',
+    color: '#ababab',
     fontWeight: "bold",
     marginBottom: 10,
+    paddingTop: 10,
+    fontWeight: 300
   },
   viewMissions: {
     fontSize: 18,
-    fontWeight: 'bold',
     textAlign: 'center',
     color: '#CCCCCC',
     backgroundColor: 'transparent',

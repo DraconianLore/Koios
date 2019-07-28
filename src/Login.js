@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, View, TextInput, Keyboard, Button } from 'react-native';
+import { StyleSheet, View, TextInput, Keyboard, Button, Text } from 'react-native';
 
 class Login extends React.Component {
     constructor(props) {
@@ -15,24 +15,27 @@ class Login extends React.Component {
 
     render() {
         return (
-            <View>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Agent ID"
-                    maxLength={2}
-                    name="agInput"
-                    keyboardType={"number-pad"}
-                    onBlur={Keyboard.dismiss}
-                    onSubmitEditing={this.sendAgentId}
-                    onChangeText={(agentId) => this.setState({agentId})}
-                    value={this.state.agentId}
-                />
-                <Button
-                    onPress={this.sendAgentId}
-                    title="Submit"
-                    accessibilityLabel = "do a press"
-                    color='#990000'
-                />
+            <View style={styles.flex}>
+                <Text style={styles.header}>CONTENT CLASSIFIED{'\n'}PLEASE ENTER KOIOS AGENT ID</Text>
+                <View>
+                    <TextInput
+                        style={styles.textInput}
+                        maxLength={2}
+                        name="agInput"
+                        keyboardType={"number-pad"}
+                        onBlur={Keyboard.dismiss}
+                        onSubmitEditing={this.sendAgentId}
+                        onChangeText={(agentId) => this.setState({agentId})}
+                        value={this.state.agentId}
+                    />
+                    <Button
+                        onPress={this.sendAgentId}
+                        title="SUBMIT"
+                        accessibilityLabel = "submit button"
+                        color='#a6a6a6'
+                        fontWeight='200'
+                    />
+                </View>
 
             </View>
         );
@@ -40,11 +43,30 @@ class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    flex: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
+        height: '100%'
+    },
+    header: {
+        fontWeight: '200',
+        fontSize: 20,
+        color: '#fafafa',
+        textAlign: 'center',
+        backgroundColor: '#000',
+        padding: 5,
+        opacity: 0.8,
+        marginTop: 150,
+        marginBottom: 50
+    },
     textInput: {
         textAlign: "center",
         fontSize: 30,
-        color: '#eee',
-        backgroundColor: '#aaa'
+        color: '#969090',
+        backgroundColor: 'transparent',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ff0000'
     },
 });
 

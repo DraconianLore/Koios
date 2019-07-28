@@ -41,9 +41,9 @@ export default class Main extends React.Component {
                 this.setState({
                     missionAvailable: true,
                     mButtonText: 'NEW MISSION AVAILABLE',
-                    bTextColour: '#ff0000',
-                    bBorderColor: '#ff0000',
-                    bShadowColor: '#ff4040',
+                    bTextColour: '#ff4a4a',
+                    bBorderColor: '#ff4a4a',
+                    bShadowColor: '#700000',
                     missionInfo: `YOUR MISSION\n\nSHOULD YOU CHOOSE TO ACCEPT IT:\n\nType: ${data.mType}\nDifficulty: ${data.mDifficulty}\nTime to complete: ${data.mTime} minutes.`
                 })
 
@@ -63,7 +63,7 @@ export default class Main extends React.Component {
                     mButtonText: 'SHOW MISSION DETAILS',
                     bTextColour: '#1fdaff',
                     bBorderColor: '#1fdaff',
-                    bShadowColor: '#61e5ff',
+                    bShadowColor: '#003169',
                     missionInfo: `${data.title}:\n\n"${data.message}"`,
                     missionDescription: data.description,
                     missionTime: mEndTime,
@@ -109,8 +109,11 @@ export default class Main extends React.Component {
     outOfTime = () => {
         this.setState({
             mButtonText: 'OK',
+            bTextColour: '#ff7d1f',
+            bBorderColor: '#ff7d1f',
+            bShadowColor: '#b36500',
             missionActive: false,
-            missionInfo: 'MISSION FAILED\n\nYou ran out of time!',
+            missionInfo: 'M I S S I O N F A I L E D\n\nYOU ARE OUT OF TIME',
             showMission: true
         })
         this.updateMissionTo('failed')
@@ -146,28 +149,28 @@ export default class Main extends React.Component {
                 textAlign: "center"
             },
             missionText: {
-                borderColor: '#330000',
-                borderWidth: 2,
-                backgroundColor: '#cc0000',
+                backgroundColor: '#0a0a0a',
+                opacity: 0.8,
                 margin: 5,
-                padding: 5,
-                borderRadius: 10,
+                padding: 10,
                 position: "absolute",
                 top: 20,
                 zIndex: 1
             },
             missionDetails: {
-                color: '#f5e653',
+                color: '#c2c2c2',
+                textAlign: 'center',
+                fontWeight: '100'
             },
             rejectButton: {
                 textAlign: "center",
                 color: '#ff003e',
                 backgroundColor: '#000',
                 alignItems: "center",
-                borderWidth: 2,
+                borderWidth: 1,
                 borderColor: '#ff003e',
-                shadowColor: '#ff416f',
-                shadowRadius: 3,
+                shadowColor: '#70002b',
+                shadowRadius: 5,
                 shadowOpacity: 1,
                 shadowOffset: {width: 0, height: 0},
                 justifyContent: "center"
@@ -186,7 +189,11 @@ export default class Main extends React.Component {
             },
             clock: {
                 height: 200,
-                width: 250
+                width: 250,
+                shadowColor: '#000',
+                shadowRadius: 10,
+                shadowOpacity: 1,
+                shadowOffset: {height: 10, width: 0}
             }
         });
 
@@ -203,9 +210,9 @@ export default class Main extends React.Component {
                     this.setState({
                         showMission: true,
                         mButtonText: 'ACCEPT',
-                        bTextColour: '#00ff6e',
-                        bBorderColor: '#00ff6e',
-                        bShadowColor: '#54ff9e',
+                        bTextColour: '#0aff0a',
+                        bBorderColor: '#0aff0a',
+                        bShadowColor: '#003800',
                         showRejectButton: true
                     })
 
