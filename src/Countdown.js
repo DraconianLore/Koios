@@ -19,8 +19,10 @@ export default class Countdown extends React.Component {
     }
   
     secondsToTime(secs){
+      let hours = Math.floor(secs / (60 * 60));
       let divisor_for_minutes = secs % (60 * 60);
       let minutes = Math.floor(divisor_for_minutes / 60);
+
       if (minutes < 10) {
         minutes = `0${minutes}`
       }
@@ -31,8 +33,14 @@ export default class Countdown extends React.Component {
         seconds = `0${seconds}`
       }
       
+      if (hours === 0) {
+        hours = ''
+      } else {
+        hours = hours + ':'
+      }
   
       let obj = {
+        "h": hours,
         "m": minutes,
         "s": seconds
       };
@@ -71,7 +79,7 @@ export default class Countdown extends React.Component {
       return(
         <View style={styles.countdownBox}>
           <View style={styles.timeBox}>
-          {this.state.outOfTime || <Text style={styles.countDown}>{this.state.time.m}:{this.state.time.s}</Text>}
+          {this.state.outOfTime || <Text style={styles.countDown}>{this.state.time.h}{this.state.time.m}:{this.state.time.s}</Text>}
           {this.state.outOfTime && <TimeBlink />}
           </View>
           <Text style={styles.timerTitle}>

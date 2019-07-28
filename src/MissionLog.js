@@ -63,7 +63,7 @@ class MissionLog extends React.Component {
                     justifyContent: "space-between",
                     flexDirection: 'row',
                     padding: 8,
-                    margin: 10,
+                    margin: 8,
                     height: 70,
                     borderWidth: 1,
                     borderColor: colour,

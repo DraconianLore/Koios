@@ -41,8 +41,8 @@ export default class Main extends React.Component {
                 this.setState({
                     missionAvailable: true,
                     mButtonText: 'NEW MISSION AVAILABLE',
-                    bTextColour: '#ff4a4a',
-                    bBorderColor: '#ff4a4a',
+                    bTextColour: '#ff3333',
+                    bBorderColor: '#ff3333',
                     bShadowColor: '#700000',
                     missionInfo: `YOUR MISSION\n\nSHOULD YOU CHOOSE TO ACCEPT IT:\n\nType: ${data.mType}\nDifficulty: ${data.mDifficulty}\nTime to complete: ${data.mTime} minutes.`
                 })
@@ -149,7 +149,12 @@ export default class Main extends React.Component {
                 textAlign: "center"
             },
             missionText: {
-                backgroundColor: '#0a0a0a',
+                backgroundColor: 'rgba(18, 18, 18, 0.9)',
+                borderWidth: 5,
+                borderColor: '#171717',
+                shadowColor: '#000',
+                shadowRadius: 10,
+                shadowOpacity: 1,
                 opacity: 0.8,
                 margin: 5,
                 padding: 10,
@@ -158,9 +163,9 @@ export default class Main extends React.Component {
                 zIndex: 1
             },
             missionDetails: {
-                color: '#c2c2c2',
+                color: '#cfcfcf',
                 textAlign: 'center',
-                fontWeight: '100'
+                fontWeight: '600'
             },
             rejectButton: {
                 textAlign: "center",

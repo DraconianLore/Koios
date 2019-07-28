@@ -63,10 +63,13 @@ const styles = StyleSheet.create({
     textInput: {
         textAlign: "center",
         fontSize: 30,
-        color: '#969090',
+        color: '#eee',
         backgroundColor: 'transparent',
         borderBottomWidth: 1,
-        borderBottomColor: '#ff0000'
+        borderBottomColor: '#ff3333',
+        shadowOpacity: 1,
+        shadowRadius: 5,
+        shadowColor: '#ff0000',
     },
 });
 

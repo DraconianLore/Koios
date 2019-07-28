@@ -50,30 +50,34 @@ export default class TopBar extends React.Component {
                 width: '100%',
                 backgroundColor: '#121212',
                 borderBottomWidth: 0.5,
-                borderBottomColor: '#a60000'
+                borderBottomColor: '#ff3333'
             },
 
             progress: {
-                height: 5,
+                height: 3,
                 backgroundColor: '#000',
                 borderRadius: 10,
                 width: '70%',
             },
             
             color: {
-                height: 5,
+                height: 3,
                 width: `${this.props.exp}%`,
-                backgroundColor: '#ff0000',
+                backgroundColor: '#ff3333',
                 borderRadius: 10,
                 shadowOpacity: 1,
                 shadowRadius: 5,
-                shadowColor: '#ff3d3d',
-                shadowOffset: { height: 0, width: 0 }
+                shadowColor: '#ff0000',
+                shadowOffset: {height: 0, width: 0}
             },
 
             empty: {
-                height: 5,
+                height: 3,
                 width: `${100 - this.props.exp}%`,
+            },
+            ranks: {
+                width: 25,
+                height: 35
             }
         })
 
@@ -82,7 +86,7 @@ export default class TopBar extends React.Component {
                 <View style={styles.flexbox}>
                     <Image
                         source={currentRank}
-                        style={{ width: 30, height: 30 }}
+                        style={styles.ranks}
                     />
                     <View style={styles.progress}>
                         <View
@@ -94,7 +98,7 @@ export default class TopBar extends React.Component {
                     </View>
                     <Image
                         source={nextRank}
-                        style={{ width: 30, height: 30 }}
+                        style={styles.ranks}
                     />
                 </View>
             </View>
