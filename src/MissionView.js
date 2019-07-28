@@ -70,7 +70,7 @@ export default class MissionView extends Component {
             <Text style={styles.textCol}>{this.state.instructionButton}</Text>
           </TouchableOpacity>
         </ImageBackground>}
-        {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} missionInfo={this.props.missionInfo} />}
+        {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} />}
       </View>
 
     )
