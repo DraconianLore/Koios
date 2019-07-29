@@ -279,7 +279,7 @@ export default class Main extends React.Component {
         return (
             <Swiper ref={(swiper) => { this._swiper = swiper; }} showsButtons={false} loop={false} showsPagination={false}>
                 <View style={styles.buttonContainer}>
-                    <Text style={styles.swipeMe}>Swipe Me</Text>
+                    {this.state.missionActive && <Text style={styles.swipeMe}>Swipe Me</Text>}
                     <View style={styles.bottomSection}>
                         {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
                             <View>
