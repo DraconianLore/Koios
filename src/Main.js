@@ -212,6 +212,14 @@ export default class Main extends React.Component {
                 shadowRadius: 10,
                 shadowOpacity: 1,
                 shadowOffset: {height: 10, width: 0}
+            },
+            swipeMe: {
+                position: "absolute",
+                left: '87%',
+                top: '40%',
+                transform: [{ rotate: '-90deg'}],
+                zIndex: 4,
+                color: '#ff0000'
             }
         });
 
@@ -271,6 +279,7 @@ export default class Main extends React.Component {
         return (
             <Swiper ref={(swiper) => { this._swiper = swiper; }} showsButtons={false} loop={false} showsPagination={false}>
                 <View style={styles.buttonContainer}>
+                    <Text style={styles.swipeMe}>Swipe Me</Text>
                     <View style={styles.bottomSection}>
                         {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
                             <View>
