@@ -56,7 +56,6 @@ export default class MissionView extends Component {
           <Text style={styles.textCol}>{this.props.missionInfo}</Text>
           <TextInput
             style={styles.textInput}
-            placeholder="INPUT YOUR ANSWER"
             multiline={true}
             editable = {true}
             numberOfLines = {4}
@@ -84,12 +83,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#9DD6EB',
     backgroundColor: '#eee',
+    borderWidth: 10,
+    borderColor: '#141414',
     opacity: 0.7,
-    
   },
   textCol: {
     color: '#fff',
-    textAlign: 'center'
+    textAlign: 'center',
+    margin: 10,
+    padding: 5,
+    backgroundColor: '#000'
   },
   textInput: {
     borderColor: '#CCCCCC',
