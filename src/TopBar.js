@@ -40,7 +40,7 @@ export default class TopBar extends React.Component {
             flexbox: {
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                justifyContent: 'space-around',
                 flexDirection: 'row'
             },
 
@@ -76,8 +76,8 @@ export default class TopBar extends React.Component {
                 width: `${100 - this.props.exp}%`,
             },
             ranks: {
-                width: 25,
-                height: 35
+                width: 20,
+                height: 25
             }
         })
 

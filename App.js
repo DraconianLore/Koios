@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   viewMissions: {
     fontSize: 18,
     textAlign: 'center',
-    color: '#CCCCCC',
+    color: '#ccc',
     backgroundColor: 'transparent',
     fontStyle: 'italic'
   }
