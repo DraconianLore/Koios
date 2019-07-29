@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Image, View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import axios from 'axios'
+import { BASE_URL } from 'react-native-dotenv';
+
 
 export default class VerificationMission extends React.Component {
     constructor(props) {
@@ -12,13 +15,13 @@ export default class VerificationMission extends React.Component {
 
 
     responseNo = () => {
-        axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/verify').then(response => {
+        axios.put(`${BASE_URL}:3000/users/` + this.props.userId + '/missions/verify').then(response => {
             this.props.setMissionComplete()
         })
     }
 
     responseYes = () => {
-        axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/verify').then(response => {
+        axios.put(`${BASE_URL}:3000/users/` + this.props.userId + '/missions/verify').then(response => {
             this.props.setMissionComplete()
         })
     }
