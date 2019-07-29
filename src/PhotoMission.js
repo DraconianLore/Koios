@@ -68,10 +68,11 @@ export default class PhotoMission extends React.Component {
         const sendImage = () => {
             let image = this.state.captures[0]
             this.setState({ uploading: true })
-            console.log('send photo to wherever')
             uploadImage(image.uri, this.state.userId, (res) => {
+                this.setState({uploading: false})
                 console.log(res)
-                this.setState({ uploading: false })
+                this.props.setMissionComplete()
+
             })
 
         }
@@ -103,7 +104,7 @@ export default class PhotoMission extends React.Component {
                         showInfo={this.showInfo}
                     />}
                     {camButton && <View style={styles.activateCamera}>
-                        <Image style={styles.camPng} source={require('../assets/images/camera.png')}/>
+                        <Image style={styles.camPng} source={require('../assets/images/camera.png')} />
                         <Button
                             onPress={this.startCamera}
                             title="ACTIVATE CAMERA"
