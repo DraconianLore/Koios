@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     color: '#ababab',
     fontWeight: "bold",
     marginBottom: 10,
-    paddingTop: 10,
-    fontWeight: 300
+    padding: 10,
+    fontWeight: 300,
   },
   viewMissions: {
     fontSize: 18,
     textAlign: 'center',
-    color: '#CCCCCC',
+    color: '#ccc',
     backgroundColor: 'transparent',
     fontStyle: 'italic'
   }

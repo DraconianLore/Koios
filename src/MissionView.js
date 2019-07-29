@@ -84,10 +84,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#9DD6EB',
     backgroundColor: '#eee',
-    opacity: 0.7
+    opacity: 0.7,
+    
   },
   textCol: {
     color: '#fff',
+    textAlign: 'center'
   },
   textInput: {
     borderColor: '#CCCCCC',

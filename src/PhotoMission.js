@@ -39,7 +39,6 @@ export default class PhotoMission extends React.Component {
 
     };
 
-
     showInfo = () => {
         if (this.state.showInstructions) {
             this.setState({ showInstructions: false })
@@ -77,17 +76,15 @@ export default class PhotoMission extends React.Component {
 
         }
 
-
         const { hasCameraPermission, type, showImage, cameraOpen, camButton } = this.state;
         if (hasCameraPermission === null) {
             return <View />;
         } else if (hasCameraPermission === false) {
-            return <Text>No access to camera</Text>;
+            return <Text>NO ACCESS TO CAMERA</Text>;
         } else {
 
             return (
                 <View style={styles.cam}>
-
                     {this.state.showInstructions && <View style={styles.instructions}>
                         <Text style={styles.instructionText}>{this.props.missionInfo}</Text>
                     </View>}
@@ -97,8 +94,8 @@ export default class PhotoMission extends React.Component {
                         type={type}
                         autoFocus={false}
                     />}
-                    {this.state.plsWait && <Text style={styles.wait}>PLEASE WAIT</Text>}
-                    {this.state.uploading && <Text style={styles.wait}>UPLOADING</Text>}
+                    {this.state.plsWait && <Text style={styles.wait}> PLEASE WAIT. . .</Text>}
+                    {this.state.uploading && <Text style={styles.wait}> UPLOADING. . .</Text>}
                     {cameraOpen && <CamButtons
                         cameraType={type}
                         setCameraType={this.setCameraType}
@@ -106,35 +103,36 @@ export default class PhotoMission extends React.Component {
                         showInfo={this.showInfo}
                     />}
                     {camButton && <View style={styles.activateCamera}>
+                        <Image style={styles.camPng} source={require('../assets/images/camera.png')}/>
                         <Button
                             onPress={this.startCamera}
-                            title="Activate Camera"
-                            color='#990000'
+                            title="ACTIVATE CAMERA"
+                            color='#700000'
                         />
                     </View>}
                     {showImage && <View style={styles.image}>
                         <Image source={this.state.captures[0]} style={{ height: '90%', width: '100%' }} />
                         {this.state.uploading || <View>
-                            <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.buttons}>NO</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.noBtn}>NO</Text></TouchableOpacity>
                             <Text style={styles.caption}>{this.props.missionDescription}</Text>
-                            <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.buttons}>YES</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.yesBtn}>YES</Text></TouchableOpacity>
                         </View>}
                     </View>}
                 </View>
 
             )
-
         }
-
-
     }
 }
 const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     instructions: {
-        backgroundColor: '#990000',
-        width: '80%',
+        backgroundColor: '#000',
+        width: '100%',
+        padding: 10,
+        opacity: 0.7,
+        marginTop: 5,
         alignSelf: "center",
         zIndex: 1
     },
@@ -142,12 +140,13 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: '40%',
         left: '20%',
-        backgroundColor: '#660000',
-        color: '#f5e653',
+        backgroundColor: '#000e21',
+        borderWidth: 5,
+        borderColor: '#00050d',
+        color: '#f0f0f0',
         fontSize: 30,
         zIndex: 4,
-        borderRadius: 2,
-        padding: 1,
+        padding: 5
     },
     instructionText: {
         color: '#ccc',
@@ -156,7 +155,13 @@ const styles = StyleSheet.create({
     activateCamera: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "flex-start",
+        backgroundColor: '#565a5e'
+    },
+    camPng: {
+        margin: 80,
+        height: 250,
+        width: 250,
     },
     cam: {
         height: winHeight,
@@ -181,38 +186,54 @@ const styles = StyleSheet.create({
         zIndex: 4,
         position: "absolute",
         bottom: 220,
+        padding: 20,
         alignSelf: "center",
         textAlign: "center",
-        backgroundColor: '#660000',
-        color: '#f5e653',
-        borderRadius: 5,
+        backgroundColor: '#000e21',
+        borderWidth: 5,
+        borderColor: '#00050d',
+        color: '#f0f0f0',
         padding: 2
     },
     answerNo: {
-        backgroundColor: '#330000',
-        position: "absolute",
-        bottom: 220,
-        left: 10,
+        left: 15,
         width: 50,
         height: 50,
+        bottom: 220,
+        borderWidth: 2,
+        borderRadius: 50,
+        borderColor: '#ff3333',
+        shadowColor: '#380000',
+        shadowRadius: 5,
+        shadowOpacity: 1,
+        position: "absolute",
         alignItems: "center",
+        backgroundColor: '#000',
         justifyContent: "center",
-        borderRadius: 50
     },
     answerYes: {
-        backgroundColor: '#003300',
-        position: "absolute",
-        bottom: 220,
-        right: 10,
+        right: 15,
         width: 50,
         height: 50,
+        bottom: 220,
+        borderWidth: 2,
+        borderRadius: 50,
+        borderColor: '#40ff53',
+        shadowColor: '#003800',
+        shadowRadius: 5,
+        shadowOpacity: 1,
+        position: "absolute",
         alignItems: "center",
+        backgroundColor: '#000',
         justifyContent: "center",
-        borderRadius: 50
 
     },
-    buttons: {
+    yesBtn: {
         textAlign: "center",
-        color: '#f5e653',
+        color: '#40ff53',
+    },
+    noBtn: {
+        textAlign: 'center',
+        color: '#ff3333',
     }
 })

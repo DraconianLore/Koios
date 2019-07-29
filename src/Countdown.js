@@ -83,7 +83,7 @@ export default class Countdown extends React.Component {
           {this.state.outOfTime && <TimeBlink />}
           </View>
           <Text style={styles.timerTitle}>
-            TIME REMAINING
+            R E M A I N I N G
           </Text>
         </View>
       );
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   countDown: {
     color: '#990000',
-    fontSize: 80,
+    fontSize: 60,
     fontWeight: "bold",
     textAlign: "center"
   },
