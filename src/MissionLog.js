@@ -75,7 +75,7 @@ class MissionLog extends React.Component {
                     height: 30
                 },
                 resultPart: {
-                    color: '#eee',
+                    color: '#b0b0b0',
                 },
                 stampImg: {
                     width: 30,
