@@ -15,6 +15,7 @@ export default function CamButtons({
     showInformation = () => {
         showInfo()
     }
+   
     return (
         <Grid style={styles.bottomToolbar}>
             <Row>

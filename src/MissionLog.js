@@ -12,7 +12,6 @@ class MissionLog extends React.Component {
         this.state = {
             userId: props.userId,
             message: [],
-            stamp: '',
         };
     }
 
@@ -28,7 +27,7 @@ class MissionLog extends React.Component {
     render() {
         const missions = this.state.message.map((mission) => {
             let typeImage = require('../assets/images/gold.png')
-            let stamp = ''
+            let stamp = require('../assets/images/eye.png')
             let colour = '#ff0026'
             let bgcolour = '#52001d'
             switch (mission.type) {
