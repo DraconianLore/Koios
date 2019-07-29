@@ -72,7 +72,10 @@ export default class PhotoMission extends React.Component {
             console.log('send photo to wherever')
             uploadImage(image.uri, this.state.userId, (res) => {
                 console.log(res)
-                this.setState({ uploading: false })
+                this.setState({ 
+                    uploading: false 
+                })
+                this.props.setMissionComplete()
             })
 
         }

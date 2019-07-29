@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     paddingTop: 10,
-    fontWeight: 300
+    fontWeight: '300'
   },
   viewMissions: {
     fontSize: 18,
