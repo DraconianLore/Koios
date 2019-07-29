@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BASE_URL } from 'react-native-dotenv';
 import { StyleSheet, View, TextInput, Button, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import PhotoMission from './PhotoMission';
+import VerificationMission from './VerificationMission';
 
 export default class MissionView extends Component {
   constructor(props) {
@@ -71,6 +72,8 @@ export default class MissionView extends Component {
           </TouchableOpacity>
         </ImageBackground>}
         {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} setMissionComplete={this.props.setMissionComplete} />}
+        {this.state.missionType === 'verification' && <VerificationMission missionDescription={this.props.missionDescription} vPhoto={this.props.vImage} userId={this.props.userId} setMissionComplete={this.props.setMissionComplete} />}
+        
       </View>
 
     )
