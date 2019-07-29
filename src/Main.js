@@ -120,6 +120,12 @@ export default class Main extends React.Component {
     setMissionComplete = () => {
         this._swiper.scrollBy(-1)
         this.resetPage()
+        setTimeout(() => {
+            this.setState({
+                missionInfo: 'M I S S I O N  C O M P L E T E',
+                showMission: true,
+            })
+        }, 100);
     }
 
     outOfTime = () => {
@@ -269,7 +275,7 @@ export default class Main extends React.Component {
         }
 
         return (
-            <Swiper ref={(swiper) => { this._swiper = swiper; }} showsButtons={false} loop={false} showsPagination={false}>
+            <Swiper ref={(swiper) => { this._swiper = swiper; }} scrollEnabled={this.state.missionActive} showsButtons={false} loop={false} showsPagination={false}>
                 <View style={styles.buttonContainer}>
                     <View style={styles.bottomSection}>
                         {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
