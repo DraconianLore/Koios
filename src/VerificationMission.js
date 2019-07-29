@@ -12,13 +12,15 @@ export default class VerificationMission extends React.Component {
 
 
     responseNo = () => {
-
-        this.props.setMissionComplete()
+        axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/verify').then(response => {
+            this.props.setMissionComplete()
+        })
     }
 
     responseYes = () => {
-
-        this.props.setMissionComplete()
+        axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/verify').then(response => {
+            this.props.setMissionComplete()
+        })
     }
     render() {
         

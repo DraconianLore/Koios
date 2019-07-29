@@ -22,7 +22,6 @@ export default class MissionView extends Component {
       this.setState({
         response: response.data.message
       })
-      console.log(response.data.message)
       if (response.data.message === 'MISSION COMPLETE') {
         // const response = axios.get(`${BASE_URL}:3000/users/` + userId).then(response => {
         // })
