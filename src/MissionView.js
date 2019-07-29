@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BASE_URL } from 'react-native-dotenv';
 import { StyleSheet, View, TextInput, Button, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import PhotoMission from './PhotoMission';
+import VerificationMission from './VerificationMission';
 
 export default class MissionView extends Component {
   constructor(props) {
@@ -21,7 +22,6 @@ export default class MissionView extends Component {
       this.setState({
         response: response.data.message
       })
-      console.log(response.data.message)
       if (response.data.message === 'MISSION COMPLETE') {
         // const response = axios.get(`${BASE_URL}:3000/users/` + userId).then(response => {
         // })
@@ -69,7 +69,9 @@ export default class MissionView extends Component {
             <Text style={styles.textCol}>{this.state.instructionButton}</Text>
           </TouchableOpacity>
         </ImageBackground>}
-        {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} />}
+        {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} setMissionComplete={this.props.setMissionComplete} />}
+        {this.state.missionType === 'verification' && <VerificationMission userId={this.props.userId} missionDescription={this.props.missionDescription} vPhoto={this.props.vImage} userId={this.props.userId} setMissionComplete={this.props.setMissionComplete} />}
+        
       </View>
 
     )

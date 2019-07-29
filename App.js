@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     color: '#ababab',
     fontWeight: "bold",
     marginBottom: 10,
-    padding: 10,
-    fontWeight: 300,
+    paddingTop: 10,
+    fontWeight: '300'
   },
   viewMissions: {
     fontSize: 18,

@@ -25,7 +25,7 @@ export default class PhotoMission extends React.Component {
     setCameraType = (cameraType) => this.setState({ type: cameraType })
 
     handleShortCapture = async () => {
-
+       
         this.setState({ plsWait: true })
         const photoData = await this.camera.takePictureAsync();
         this.setState({
@@ -49,7 +49,7 @@ export default class PhotoMission extends React.Component {
     async componentDidMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted' });
-
+      
     }
     startCamera = () => {
         this.setState({
@@ -71,7 +71,10 @@ export default class PhotoMission extends React.Component {
             console.log('send photo to wherever')
             uploadImage(image.uri, this.state.userId, (res) => {
                 console.log(res)
-                this.setState({ uploading: false })
+                this.setState({ 
+                    uploading: false 
+                })
+                this.props.setMissionComplete()
             })
 
         }

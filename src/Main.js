@@ -25,7 +25,8 @@ export default class Main extends React.Component {
             missionDescription: '',
             showTimeLeft: false,
             missionType: '',
-            missionId: ''
+            missionId: '',
+            vImage: ''
         }
         this.outOfTime = this.outOfTime.bind(this)
         this.checkMissions = this.checkMissions.bind(this)
@@ -34,7 +35,6 @@ export default class Main extends React.Component {
     }
     checkMissions = () => {
         const response = axios.get(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/current').then(response => {
-            console.log(response.data.message)
             data = response.data.message
             this.props.updateExp(response.data.experience)
             this.props.updateRank(response.data.rank)
@@ -50,12 +50,25 @@ export default class Main extends React.Component {
 
             } else if (data.current) {
                 let mEndTime = new Date(data.endTime)
+                let missionInfo = ''
+                let vImage = ''
                 mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) / 1000
                 if (data.mType === 'photo') {
-                    data.description= `Is this a picture of\n${data.title.slice(16)}\n${data.message}` 
+                    data.description = `Is this a picture of\n${data.title.slice(16)}\n${data.message}` 
+
+                    missionInfo = `${data.title}:\n\n"${data.message}"`
+                }
+                if (data.mType === 'verification') {
+                    data.description = `${data.title}\n${data.description}?`
+                    missionInfo = "Verify this image"
+                    vImage = data.image
+                    
+                    console.log('image:', data.image)
+
                 }
                 if (data.mType === 'encryption' || data.mType === 'decryption') {
                     data.mType = 'cypher'
+                    missionInfo = `${data.title}:\n\n"${data.message}"`
                 }
                 this.setState({
                     missionActive: true,
@@ -65,12 +78,13 @@ export default class Main extends React.Component {
                     bTextColour: '#1fdaff',
                     bBorderColor: '#1fdaff',
                     bShadowColor: '#003169',
-                    missionInfo: `${data.title}:\n\n"${data.message}"`,
+                    missionInfo: missionInfo,
                     missionDescription: data.description,
                     missionTime: mEndTime,
                     showTimeLeft: true,
                     missionType: data.mType,
-                    missionId: data.missionId
+                    missionId: data.missionId,
+                    vImage: vImage
                 });
                 
             }
@@ -286,6 +300,7 @@ export default class Main extends React.Component {
                     missionDescription={this.state.missionDescription}
                     setMissionComplete={this.setMissionComplete}
                     missionActive={this.state.missionActive}
+                    vImage={this.state.vImage}
                 />}
             </Swiper>
         )

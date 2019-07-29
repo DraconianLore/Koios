@@ -73,7 +73,10 @@ export default class Countdown extends React.Component {
         this.setState({outOfTime: true})
       }
     }
-  
+    componentWillUnmount() {
+      clearInterval(this.timer);
+
+    }
     render() {
       this.startTimer()
       return(
