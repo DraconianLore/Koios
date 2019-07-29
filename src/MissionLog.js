@@ -28,8 +28,9 @@ class MissionLog extends React.Component {
         const missions = this.state.message.map((mission) => {
             let typeImage = require('../assets/images/gold.png')
             let stamp = require('../assets/images/eye.png')
-            let colour = '#ff0026'
-            let bgcolour = '#52001d'
+            let colour = '#ffa8a8'
+            let bgcolour = '#520012'
+            let bshadowColor = '#750101'
             switch (mission.type) {
                 case 'photo':
                     typeImage = require('../assets/images/photo.png')
@@ -43,6 +44,7 @@ class MissionLog extends React.Component {
             if (mission.result != 'FAILED') {
                 colour = '#00ffa6'
                 bgcolour = '#005235'
+                bshadowColor = '#003800'
             }
 
             switch (mission.result) {
@@ -67,7 +69,11 @@ class MissionLog extends React.Component {
                     borderWidth: 1,
                     borderColor: colour,
                     backgroundColor: bgcolour,
-                    opacity: 0.7
+                    opacity: 0.7,
+                    shadowColor: bshadowColor,
+                    shadowRadius: 10,
+                    shadowOpacity: 1,
+                    
                 },
                 photo: {
                     width: 30,
