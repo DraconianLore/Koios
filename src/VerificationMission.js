@@ -2,24 +2,17 @@ import React from 'react';
 import { StyleSheet, Image, View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import axios from 'axios'
 import { BASE_URL } from 'react-native-dotenv';
-
-
 export default class VerificationMission extends React.Component {
     constructor(props) {
         super(props)
-
-
         this.responseNo = this.responseNo.bind(this)
         this.responseYes = this.responseYes.bind(this)
     }
-
-
     responseNo = () => {
         axios.put(`${BASE_URL}:3000/users/` + this.props.userId + '/missions/verify').then(response => {
             this.props.setMissionComplete()
         })
     }
-
     responseYes = () => {
         axios.put(`${BASE_URL}:3000/users/` + this.props.userId + '/missions/verify').then(response => {
             this.props.setMissionComplete()
@@ -28,9 +21,6 @@ export default class VerificationMission extends React.Component {
     render() {
         
         return (
-
-
-
             <View style={styles.verification}>
                 <View style={styles.image}>
                     <Image source={{ uri: this.props.vPhoto}} style={{ height: '90%', width: '100%' }} />
@@ -43,7 +33,6 @@ export default class VerificationMission extends React.Component {
             </View>
         )
     }
-
 }
 const { width: winWidth, height: winHeight } = Dimensions.get('window');
 

@@ -4,7 +4,6 @@ import React from 'react';
 import { StyleSheet, Image, View, Text, Dimensions, Button, TouchableOpacity } from 'react-native';
 import CamButtons from './CamButtons';
 import uploadImage from './uploadImage'
-
 export default class PhotoMission extends React.Component {
     constructor(props) {
         super(props);
@@ -23,9 +22,8 @@ export default class PhotoMission extends React.Component {
         this.showInfo = this.showInfo.bind(this)
     }
     setCameraType = (cameraType) => this.setState({ type: cameraType })
-
     handleShortCapture = async () => {
-
+       
         this.setState({ plsWait: true })
         const photoData = await this.camera.takePictureAsync();
         this.setState({
@@ -36,9 +34,7 @@ export default class PhotoMission extends React.Component {
             showInstructions: false,
             plsWait: false
         })
-
     };
-
     showInfo = () => {
         if (this.state.showInstructions) {
             this.setState({ showInstructions: false })
@@ -49,7 +45,7 @@ export default class PhotoMission extends React.Component {
     async componentDidMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted' });
-
+      
     }
     startCamera = () => {
         this.setState({
@@ -71,18 +67,18 @@ export default class PhotoMission extends React.Component {
             console.log('send photo to wherever')
             uploadImage(image.uri, this.state.userId, (res) => {
                 console.log(res)
-                this.setState({ uploading: false })
+                this.setState({ 
+                    uploading: false 
+                })
+                this.props.setMissionComplete()
             })
-
         }
-
         const { hasCameraPermission, type, showImage, cameraOpen, camButton } = this.state;
         if (hasCameraPermission === null) {
             return <View />;
         } else if (hasCameraPermission === false) {
-            return <Text>NO ACCESS TO CAMERA</Text>;
+            return <Text>No access to camera</Text>;
         } else {
-
             return (
                 <View style={styles.cam}>
                     {this.state.showInstructions && <View style={styles.instructions}>
@@ -94,8 +90,8 @@ export default class PhotoMission extends React.Component {
                         type={type}
                         autoFocus={false}
                     />}
-                    {this.state.plsWait && <Text style={styles.wait}> PLEASE WAIT. . .</Text>}
-                    {this.state.uploading && <Text style={styles.wait}> UPLOADING. . .</Text>}
+                    {this.state.plsWait && <Text style={styles.wait}>PLEASE WAIT</Text>}
+                    {this.state.uploading && <Text style={styles.wait}>UPLOADING</Text>}
                     {cameraOpen && <CamButtons
                         cameraType={type}
                         setCameraType={this.setCameraType}
@@ -103,29 +99,27 @@ export default class PhotoMission extends React.Component {
                         showInfo={this.showInfo}
                     />}
                     {camButton && <View style={styles.activateCamera}>
-                        <Image style={styles.camPng} source={require('../assets/images/camera.png')}/>
                         <Button
                             onPress={this.startCamera}
-                            title="ACTIVATE CAMERA"
-                            color='#700000'
+                            title="Activate Camera"
+                            color='#990000'
                         />
                     </View>}
                     {showImage && <View style={styles.image}>
                         <Image source={this.state.captures[0]} style={{ height: '90%', width: '100%' }} />
                         {this.state.uploading || <View>
-                            <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.noBtn}>NO</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.buttons}>NO</Text></TouchableOpacity>
                             <Text style={styles.caption}>{this.props.missionDescription}</Text>
-                            <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.yesBtn}>YES</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.buttons}>YES</Text></TouchableOpacity>
                         </View>}
                     </View>}
                 </View>
-
             )
         }
     }
 }
-const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
+const { width: winWidth, height: winHeight } = Dimensions.get('window');
 const styles = StyleSheet.create({
     instructions: {
         backgroundColor: '#000',

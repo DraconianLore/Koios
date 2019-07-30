@@ -31,8 +31,6 @@ export default class MissionView extends Component {
       }
     })
   }
-
- 
   
   render() {
 

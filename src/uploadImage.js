@@ -6,15 +6,7 @@ export default async function uploadImage(image, user, cb) {
 
     let URL = `${BASE_URL}:3000/users/${user}/missions/verify`;
     console.log(URL)
-    // Note:
-    // Uncomment this if you want to experiment with local server
-    //
-    // if (Constants.isDevice) {
-    //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-    // } else {
-    //   apiUrl = `http://localhost:3000/upload`
-    // }
-
+    
     let uriParts = image.split('.');
     let fileType = uriParts[uriParts.length - 1];
 
