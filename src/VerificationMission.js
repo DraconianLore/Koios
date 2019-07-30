@@ -26,7 +26,7 @@ export default class VerificationMission extends React.Component {
                     <Image source={{ uri: this.props.vPhoto}} style={{ height: '90%', width: '100%' }} />
                     <View>
                         <TouchableOpacity onPress={this.responseNo} style={styles.answerNo}><Text style={styles.buttons}>NO</Text></TouchableOpacity>
-                        <Text style={styles.caption}>{this.props.missionDescription}</Text>
+                        <Text style={styles.caption}>{`${this.props.missionDescription}\n`}</Text>
                         <TouchableOpacity onPress={this.responseYes} style={styles.answerYes}><Text style={styles.buttons}>YES</Text></TouchableOpacity>
                     </View>
                 </View>

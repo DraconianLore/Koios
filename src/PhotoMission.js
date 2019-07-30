@@ -107,7 +107,7 @@ export default class PhotoMission extends React.Component {
                         <Image source={this.state.captures[0]} style={{ height: '100%', width: '100%' }} />
                         {this.state.uploading || <View>
                             <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.noBtn}>NO</Text></TouchableOpacity>
-                            <Text style={styles.caption}>{this.props.missionDescription}</Text>
+                            <Text style={styles.caption}>{`${this.props.missionDescription}\n`}</Text>
                             <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.yesBtn}>YES</Text></TouchableOpacity>
                         </View>}
                     </View>}
