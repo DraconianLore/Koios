@@ -19,12 +19,12 @@ export default class MissionView extends Component {
   }
 
   buttonPress = () => {
-    const response = axios.patch(`${BASE_URL}:3000/users/` + this.state.userId + '/missions/verify?message=' + this.state.answer).then(response => {
+    const response = axios.patch(`https://koios.herokuapp.com/users/` + this.state.userId + '/missions/verify?message=' + this.state.answer).then(response => {
       this.setState({
         response: response.data.message
       })
       if (response.data.message === 'MISSION COMPLETE') {
-        // const response = axios.get(`${BASE_URL}:3000/users/` + userId).then(response => {
+        // const response = axios.get(`https://koios.herokuapp.com/users/` + userId).then(response => {
         // })
         this.props.setMissionComplete()
      

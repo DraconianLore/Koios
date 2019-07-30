@@ -29,11 +29,11 @@ export default function App() {
 
 
       // Swap out manual ID entry to restrict each device to a single account
-      // const response = axios.get(`${BASE_URL}:3000/users/` + Constants.installationId).then(response => {
+      // const response = axios.get(`https://koios.herokuapp.com/users/` + Constants.installationId).then(response => {
 
 
         // Using manual ID entry for DEMO purposes
-      const response = axios.get(`${BASE_URL}:3000/users/` + userId).then(response => {
+      const response = axios.get(`https://koios.herokuapp.com/users/` + userId).then(response => {
 
         setMessage(response.data.message)
         if (response.data.message.slice(0, 3) === 'Wel') {

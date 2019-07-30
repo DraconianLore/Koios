@@ -9,12 +9,12 @@ export default class VerificationMission extends React.Component {
         this.responseYes = this.responseYes.bind(this)
     }
     responseNo = () => {
-        axios.put(`${BASE_URL}:3000/users/` + this.props.userId + '/missions/verify').then(response => {
+        axios.put(`https://koios.herokuapp.com/users/` + this.props.userId + '/missions/verify').then(response => {
             this.props.setMissionComplete()
         })
     }
     responseYes = () => {
-        axios.put(`${BASE_URL}:3000/users/` + this.props.userId + '/missions/verify').then(response => {
+        axios.put(`https://koios.herokuapp.com/users/` + this.props.userId + '/missions/verify').then(response => {
             this.props.setMissionComplete()
         })
     }
