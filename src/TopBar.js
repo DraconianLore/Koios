@@ -32,7 +32,7 @@ export default class TopBar extends React.Component {
                 break;
             case 4:
                 currentRank = require('../assets/images/platinum.png')
-                nextRank = require('../assets/images/bronze.png')
+                nextRank = require('../assets/images/eye.png')
                 break;
         }
         
