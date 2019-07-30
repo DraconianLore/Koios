@@ -90,8 +90,8 @@ export default class PhotoMission extends React.Component {
                         type={type}
                         autoFocus={false}
                     />}
-                    {this.state.plsWait && <Text style={styles.wait}>PLEASE WAIT</Text>}
-                    {this.state.uploading && <Text style={styles.wait}>UPLOADING</Text>}
+                    {this.state.plsWait && <Text style={styles.wait}>PLEASE WAIT...</Text>}
+                    {this.state.uploading && <Text style={styles.wait}>UPLOADING...</Text>}
                     {cameraOpen && <CamButtons
                         cameraType={type}
                         setCameraType={this.setCameraType}
@@ -99,18 +99,19 @@ export default class PhotoMission extends React.Component {
                         showInfo={this.showInfo}
                     />}
                     {camButton && <View style={styles.activateCamera}>
-                        <Button
-                            onPress={this.startCamera}
-                            title="Activate Camera"
-                            color='#990000'
-                        />
-                    </View>}
+                       <Image style={styles.camPng} source={require('../assets/images/camera.png')} />
+                       <Button
+                           onPress={this.startCamera}
+                           title="ACTIVATE CAMERA"
+                           color='#700000'
+                       />
+                   </View>}
                     {showImage && <View style={styles.image}>
-                        <Image source={this.state.captures[0]} style={{ height: '90%', width: '100%' }} />
+                        <Image source={this.state.captures[0]} style={{ height: '100%', width: '100%' }} />
                         {this.state.uploading || <View>
-                            <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.buttons}>NO</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={retakeImage} style={styles.answerNo}><Text style={styles.noBtn}>NO</Text></TouchableOpacity>
                             <Text style={styles.caption}>{this.props.missionDescription}</Text>
-                            <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.buttons}>YES</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={sendImage} style={styles.answerYes}><Text style={styles.yesBtn}>YES</Text></TouchableOpacity>
                         </View>}
                     </View>}
                 </View>
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     },
     wait: {
         position: "absolute",
-        bottom: '40%',
+        bottom: '20%',
         left: '20%',
         backgroundColor: '#000e21',
         borderWidth: 5,
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
     caption: {
         zIndex: 4,
         position: "absolute",
-        bottom: 220,
+        bottom: 120,
         padding: 20,
         alignSelf: "center",
         textAlign: "center",
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
         left: 15,
         width: 50,
         height: 50,
-        bottom: 220,
+        bottom: 120,
         borderWidth: 2,
         borderRadius: 50,
         borderColor: '#ff3333',
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
         right: 15,
         width: 50,
         height: 50,
-        bottom: 220,
+        bottom: 120,
         borderWidth: 2,
         borderRadius: 50,
         borderColor: '#40ff53',

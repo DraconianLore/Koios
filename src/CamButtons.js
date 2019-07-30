@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         width: '100%',
         position: 'absolute',
         height: 100,
-        bottom: 150,
+        bottom: 50,
         zIndex: 1
     },
     captureBtn: {
