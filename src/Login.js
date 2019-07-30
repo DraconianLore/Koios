@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: '#eee',
         backgroundColor: '#000',
-        opacity: 0.5,
+        opacity: 0.6,
         borderBottomWidth: 1,
         borderBottomColor: '#ff3333',
     },

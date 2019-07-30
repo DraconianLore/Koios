@@ -87,8 +87,8 @@ export default class PhotoMission extends React.Component {
                         type={type}
                         autoFocus={false}
                     />}
-                    {this.state.plsWait && <Text style={styles.wait}>PLEASE WAIT...</Text>}
-                    {this.state.uploading && <Text style={styles.wait}>UPLOADING...</Text>}
+                    {this.state.plsWait && <Image style={styles.wait} source={require('../assets/images/loading.gif')}/>}
+                    {this.state.uploading && <Image style={styles.wait} source={require('../assets/images/loading.gif')}/>}
                     {cameraOpen && <CamButtons
                         cameraType={type}
                         setCameraType={this.setCameraType}
@@ -130,13 +130,10 @@ const styles = StyleSheet.create({
     },
     wait: {
         position: "absolute",
-        bottom: '20%',
-        left: '20%',
-        backgroundColor: '#000e21',
-        borderWidth: 5,
-        borderColor: '#00050d',
-        color: '#f0f0f0',
-        fontSize: 30,
+        bottom: '40%',
+        left: '40%',
+        height: 80,
+        width: 90,
         zIndex: 4,
         padding: 5
     },
@@ -175,46 +172,50 @@ const styles = StyleSheet.create({
     },
     caption: {
         zIndex: 4,
-        position: "absolute",
-        bottom: 120,
-        padding: 20,
+        bottom: 455,
+        width: '100%',
+        padding: 10,
+        color: '#f0f0f0',
+        overflow: 'hidden',
         alignSelf: "center",
         textAlign: "center",
-        backgroundColor: '#000e21',
+        position: "absolute",
         borderWidth: 5,
-        borderColor: '#00050d',
-        color: '#f0f0f0',
-        padding: 2,
-        maxWidth: '60%',
+        borderColor: '#171717',
+        backgroundColor: '#000',
+        shadowColor: '#000',
+        shadowRadius: 5,
+        shadowOpacity: 1,
+        opacity: 0.7,
         // BUG - not showing too long sentences properly
     },
     answerNo: {
-        left: 15,
+        left: 20,
         width: 50,
         height: 50,
-        bottom: 120,
+        bottom: 70,
         borderWidth: 2,
-        borderRadius: 50,
         borderColor: '#ff3333',
         shadowColor: '#380000',
         shadowRadius: 5,
         shadowOpacity: 1,
+        shadowOffset: {height: 2, width: 0},
         position: "absolute",
         alignItems: "center",
         backgroundColor: '#000',
         justifyContent: "center",
     },
     answerYes: {
-        right: 15,
+        right: 20,
         width: 50,
         height: 50,
-        bottom: 120,
+        bottom: 70,
         borderWidth: 2,
-        borderRadius: 50,
         borderColor: '#40ff53',
         shadowColor: '#003800',
         shadowRadius: 5,
         shadowOpacity: 1,
+        shadowOffset: {height: 2, width: 0},
         position: "absolute",
         alignItems: "center",
         backgroundColor: '#000',

@@ -54,7 +54,7 @@ export default class Main extends React.Component {
                 let vImage = ''
                 mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) / 1000
                 if (data.mType === 'photo') {
-                    data.description = `Is this a picture of\n${data.title.slice(16)}\n${data.message}` 
+                    data.description = `IS THIS A PHOTO OF\n${data.title.slice(16)}\n${data.message}` 
 
                     missionInfo = `${data.title}:\n\n"${data.message}"`
                 }

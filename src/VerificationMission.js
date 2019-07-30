@@ -23,11 +23,11 @@ export default class VerificationMission extends React.Component {
         return (
             <View style={styles.verification}>
                 <View style={styles.image}>
-                    <Image source={{ uri: this.props.vPhoto}} style={{ height: '90%', width: '100%' }} />
+                    <Image source={{ uri: this.props.vPhoto}} style={{ height: '100%', width: '100%' }} />
                     <View>
-                        <TouchableOpacity onPress={this.responseNo} style={styles.answerNo}><Text style={styles.buttons}>NO</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={this.responseNo} style={styles.answerNo}><Text style={styles.noBtn}>NO</Text></TouchableOpacity>
                         <Text style={styles.caption}>{`${this.props.missionDescription}\n`}</Text>
-                        <TouchableOpacity onPress={this.responseYes} style={styles.answerYes}><Text style={styles.buttons}>YES</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={this.responseYes} style={styles.answerYes}><Text style={styles.yesBtn}>YES</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -58,40 +58,62 @@ const styles = StyleSheet.create({
     },
     caption: {
         zIndex: 4,
-        position: "absolute",
-        bottom: 220,
+        bottom: 455,
+        width: '100%',
+        padding: 10,
+        color: '#f0f0f0',
+        overflow: 'hidden',
         alignSelf: "center",
         textAlign: "center",
-        backgroundColor: '#660000',
-        color: '#f5e653',
-        borderRadius: 5,
-        padding: 2
+        position: "absolute",
+        borderWidth: 5,
+        borderColor: '#171717',
+        backgroundColor: '#000',
+        shadowColor: '#000',
+        shadowRadius: 5,
+        shadowOpacity: 1,
+        opacity: 0.7,
+        // BUG - not showing too long sentences properly
     },
     answerNo: {
-        backgroundColor: '#330000',
-        position: "absolute",
-        bottom: 220,
-        left: 10,
+        left: 20,
         width: 50,
         height: 50,
+        bottom: 70,
+        borderWidth: 2,
+        borderColor: '#ff3333',
+        shadowColor: '#380000',
+        shadowRadius: 5,
+        shadowOpacity: 1,
+        shadowOffset: {height: 2, width: 0},
+        position: "absolute",
         alignItems: "center",
+        backgroundColor: '#000',
         justifyContent: "center",
-        borderRadius: 50
     },
     answerYes: {
-        backgroundColor: '#003300',
-        position: "absolute",
-        bottom: 220,
-        right: 10,
+        right: 20,
         width: 50,
         height: 50,
+        bottom: 70,
+        borderWidth: 2,
+        borderColor: '#40ff53',
+        shadowColor: '#003800',
+        shadowRadius: 5,
+        shadowOpacity: 1,
+        shadowOffset: {height: 2, width: 0},
+        position: "absolute",
         alignItems: "center",
+        backgroundColor: '#000',
         justifyContent: "center",
-        borderRadius: 50
 
     },
-    buttons: {
+    yesBtn: {
         textAlign: "center",
-        color: '#f5e653',
+        color: '#40ff53',
+    },
+    noBtn: {
+        textAlign: 'center',
+        color: '#ff3333',
     }
 })

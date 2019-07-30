@@ -67,7 +67,7 @@ export default class MissionView extends Component {
           <Button 
             title = 'SUBMIT'
             onPress={this.buttonPress}
-            color='#ff0000'
+            color='#005c9e'
           />
         </ImageBackground>}
         {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} setMissionComplete={this.props.setMissionComplete} />}
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     color: '#cccccc'
   },
   instructions: {
-    backgroundColor: '#202730',
+    backgroundColor: '#181b1f',
     color: '#b0b0b0',
     textAlign: 'center',
     padding: 10,
