@@ -62,9 +62,6 @@ export default class Main extends React.Component {
                     data.description = `${data.title}\n${data.description}?`
                     missionInfo = "Verify this image"
                     vImage = data.image
-                    
-                    console.log('image:', data.image)
-
                 }
                 if (data.mType === 'encryption' || data.mType === 'decryption') {
                     data.mType = 'cypher'
@@ -231,7 +228,7 @@ export default class Main extends React.Component {
 
         buttonPress = () => {
 
-            this.setState({ showRejectButton: false })
+            this.setState({ showRejectButton: false,})
             if (this.state.missionAvailable) {
                 if (this.state.mButtonText == 'ACCEPT') {
                     this.updateMissionTo('accepted')
@@ -274,6 +271,7 @@ export default class Main extends React.Component {
         }
 
         newMission = () => {
+            this.setState({ showMission: false })
             if (!this.state.missionActive && !this.state.missionAvailable) {
                 this.updateMissionTo('new')
             }

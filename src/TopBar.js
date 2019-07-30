@@ -12,7 +12,6 @@ export default class TopBar extends React.Component {
     }
 
     render() {
-        console.log(this.props.rank)
         switch(this.props.rank) {
             case 0:
                 currentRank = require('../assets/images/iron.png')

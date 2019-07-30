@@ -34,6 +34,11 @@ export default class PhotoMission extends React.Component {
             showInstructions: false,
             plsWait: false
         })
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fix verifications issue, minor layour changes
     };
     showInfo = () => {
         if (this.state.showInstructions) {
@@ -66,7 +71,6 @@ export default class PhotoMission extends React.Component {
             this.setState({ uploading: true })
             uploadImage(image.uri, this.state.userId, (res) => {
                 this.setState({uploading: false})
-                console.log(res)
                 this.props.setMissionComplete()
 
             })
@@ -185,7 +189,9 @@ const styles = StyleSheet.create({
         borderWidth: 5,
         borderColor: '#00050d',
         color: '#f0f0f0',
-        padding: 2
+        padding: 2,
+        maxWidth: '60%',
+        // BUG - not showing too long sentences properly
     },
     answerNo: {
         left: 15,

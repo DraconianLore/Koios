@@ -5,8 +5,8 @@ import axios from 'axios';
 export default async function uploadImage(image, user, cb) {
 
     let URL = `${BASE_URL}:3000/users/${user}/missions/verify`;
-    console.log(URL)
-    
+ 
+
     let uriParts = image.split('.');
     let fileType = uriParts[uriParts.length - 1];
 
@@ -16,7 +16,6 @@ export default async function uploadImage(image, user, cb) {
         name: `photo-${user}.${fileType}`,
         type: `image/${fileType}`,
     });
-    console.log(formData)
     axios.put(URL, formData, {
         headers: {
             'accept': 'application/json',
@@ -30,5 +29,3 @@ export default async function uploadImage(image, user, cb) {
             console.log('An error occurred:', error)
         });
 }
-
-
