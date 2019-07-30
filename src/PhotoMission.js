@@ -34,11 +34,6 @@ export default class PhotoMission extends React.Component {
             showInstructions: false,
             plsWait: false
         })
-<<<<<<< HEAD
-=======
-
-
->>>>>>> fix verifications issue, minor layour changes
     };
     showInfo = () => {
         if (this.state.showInstructions) {

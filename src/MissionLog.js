@@ -27,7 +27,7 @@ class MissionLog extends React.Component {
     render() {
         const missions = this.state.message.map((mission) => {
             let typeImage = require('../assets/images/gold.png')
-            let stamp = require('../assets/images/eye.png')
+            let stamp = require('../assets/images/pending.png')
             let colour = '#380000'
             switch (mission.type) {
                 case 'photo':

@@ -52,9 +52,13 @@ export default class MissionView extends Component {
         style={{width: '100%', height: '100%'}}>
           <Text style={styles.textCol}>{this.props.missionInfo}</Text>
           <Text style={styles.invalid}>{this.state.response}</Text>
+          <TouchableOpacity onPress={showInstructions} style={styles.instructions}>
+            <Text style={styles.instructions}>{this.state.instructionButton}</Text>
+          </TouchableOpacity>
           <TextInput
             style={styles.textInput}
             placeholder="INPUT YOUR ANSWER"
+            placeholderTextColor='#666'
             multiline={true}
             editable = {true}
             numberOfLines = {4}
@@ -65,9 +69,6 @@ export default class MissionView extends Component {
             onPress={this.buttonPress}
             color='#ff0000'
           />
-          <TouchableOpacity onPress={showInstructions} style={styles.instructions}>
-            <Text style={styles.textCol}>{this.state.instructionButton}</Text>
-          </TouchableOpacity>
         </ImageBackground>}
         {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} setMissionComplete={this.props.setMissionComplete} />}
         {this.state.missionType === 'verification' && <VerificationMission userId={this.props.userId} missionDescription={this.props.missionDescription} vPhoto={this.props.vImage} userId={this.props.userId} setMissionComplete={this.props.setMissionComplete} />}
@@ -89,13 +90,13 @@ const styles = StyleSheet.create({
     color: '#b0b0b0',
     textAlign: 'center',
     backgroundColor: '#000',
-    padding: 15,
+    padding: 10,
   },
   invalid: {
     color: '#ff0000',
     textAlign: 'center',
     backgroundColor: '#000',
-    padding: 15,
+    padding: 10,
   },
   textInput: {
     borderColor: '#CCCCCC',
@@ -105,9 +106,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 10,
     backgroundColor: '#000000',
     opacity: 0.7,
     color: '#cccccc'
+  },
+  instructions: {
+    backgroundColor: '#202730',
+    color: '#b0b0b0',
+    textAlign: 'center',
+    padding: 10,
   }
 })
