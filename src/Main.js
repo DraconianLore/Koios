@@ -218,11 +218,10 @@ export default class Main extends React.Component {
             },
             swipeMe: {
                 position: "absolute",
-                left: '87%',
+                height: 40,
+                width: 40,
+                right: '1%',
                 top: '40%',
-                transform: [{ rotate: '-90deg'}],
-                zIndex: 4,
-                color: '#ff0000'
             }
         });
 
@@ -283,7 +282,7 @@ export default class Main extends React.Component {
         return (
             <Swiper ref={(swiper) => { this._swiper = swiper; }} scrollEnabled={this.state.missionActive} showsButtons={false} loop={false} showsPagination={false}>
                 <View style={styles.buttonContainer}>
-                    {this.state.missionActive && <Text style={styles.swipeMe}>Swipe Me</Text>}
+                    {this.state.missionActive && <Image style={styles.swipeMe} source={require('../assets/images/tab.png')}/>}
                     <View style={styles.bottomSection}>
                         {this.state.showRejectButton && <TouchableOpacity onPress={rejectPress} style={styles.rejectButton}>
                             <View>

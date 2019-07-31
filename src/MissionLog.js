@@ -26,7 +26,7 @@ class MissionLog extends React.Component {
 
     render() {
         const missions = this.state.message.map((mission) => {
-            let typeImage = require('../assets/images/gold.png')
+            let typeImage = require('../assets/images/validation.png')
             let stamp = require('../assets/images/pending.png')
             let colour = '#a62f00'
             switch (mission.type) {
@@ -62,7 +62,7 @@ class MissionLog extends React.Component {
                     height: 70,
                     borderWidth: 1,
                     borderColor: colour,
-                    backgroundColor: '#171717',
+                    backgroundColor: '#0d0d0d',
                     shadowColor: '#000',
                     shadowRadius: 5,
                     shadowOpacity: 1,
@@ -73,7 +73,7 @@ class MissionLog extends React.Component {
                     height: 30
                 },
                 resultPart: {
-                    color: '#b0b0b0',
+                    color: '#7a7a7a',
                 },
                 stampImg: {
                     width: 30,

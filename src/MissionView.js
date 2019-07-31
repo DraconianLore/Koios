@@ -48,7 +48,7 @@ export default class MissionView extends Component {
     
     return (      
       <View style={styles.mission}>
-        {this.state.missionType === 'cypher' && <ImageBackground source={require('../assets/images/matrix.gif')}
+        {this.state.missionType === 'cypher' && <ImageBackground source={require('../assets/images/missionView.jpg')}
         style={{width: '100%', height: '100%'}}>
           <Text style={styles.textCol}>{this.props.missionInfo}</Text>
           <Text style={styles.invalid}>{this.state.response}</Text>
@@ -67,7 +67,7 @@ export default class MissionView extends Component {
           <Button 
             title = 'SUBMIT'
             onPress={this.buttonPress}
-            color='#005c9e'
+            color='#730000'
           />
         </ImageBackground>}
         {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} setMissionComplete={this.props.setMissionComplete} />}
@@ -82,20 +82,17 @@ const styles = StyleSheet.create({
   mission: {
     flex: 1,
     flexDirection: 'column-reverse',
-    backgroundColor: '#9DD6EB',
     backgroundColor: '#eee',
-    opacity: 0.7,
   },
   textCol: {
     color: '#b0b0b0',
     textAlign: 'center',
-    backgroundColor: '#000',
-    padding: 10,
+    padding: 20,
+    fontSize: 15,
   },
   invalid: {
     color: '#ff0000',
     textAlign: 'center',
-    backgroundColor: '#000',
     padding: 10,
   },
   textInput: {
@@ -107,13 +104,13 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     backgroundColor: '#000000',
+    textAlign: 'center',
     opacity: 0.7,
     color: '#cccccc'
   },
   instructions: {
-    backgroundColor: '#181b1f',
     color: '#b0b0b0',
     textAlign: 'center',
-    padding: 10,
+    padding: 5,
   }
 })

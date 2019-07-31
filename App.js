@@ -87,10 +87,11 @@ const styles = StyleSheet.create({
   },
   message: {
     textAlign: "center",
+    backgroundColor: '#000',
     color: '#ababab',
     fontWeight: "bold",
-    marginBottom: 10,
-    paddingTop: 10,
+    padding: 10,
+    opacity: 0.9,
     fontWeight: '300'
   },
   viewMissions: {

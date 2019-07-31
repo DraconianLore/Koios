@@ -16,12 +16,12 @@ class Login extends React.Component {
     render() {
         return (
             <View style={styles.flex}>
-                <Text style={styles.header}>CONTENT CLASSIFIED{'\n'}VERIFY CREDENTIALS</Text>
+                <Text style={styles.header}>CONTENT CLASSIFIED{'\n'}VERIFY AGENT CREDENTIALS</Text>
                 <View>
                     <TextInput
                         style={styles.textInput}
-                        placeholder="KOIOS AGENT ID"
-                        placeholderTextColor='#999'
+                        placeholder="K O I O S  I D"
+                        placeholderTextColor='#8f8f8f'
                         maxLength={2}
                         name="agInput"
                         keyboardType={"number-pad"}
@@ -60,14 +60,13 @@ const styles = StyleSheet.create({
         padding: 5,
         opacity: 0.8,
         marginTop: 150,
-        marginBottom: 20
+        marginBottom: 100
     },
     textInput: {
         textAlign: "center",
         fontSize: 30,
         color: '#eee',
-        backgroundColor: '#000',
-        opacity: 0.6,
+        opacity: 0.8,
         borderBottomWidth: 1,
         borderBottomColor: '#ff3333',
     },
