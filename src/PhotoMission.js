@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     },
     caption: {
         zIndex: 4,
-        bottom: 455,
+        bottom: 440,
         width: '100%',
         padding: 10,
         color: '#f0f0f0',
@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOpacity: 1,
         opacity: 0.7,
-        // BUG - not showing too long sentences properly
     },
     answerNo: {
         left: 20,

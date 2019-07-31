@@ -54,7 +54,7 @@ export default class Main extends React.Component {
                 let vImage = ''
                 mEndTime = (Date.parse(mEndTime) - Date.parse(new Date())) / 1000
                 if (data.mType === 'photo') {
-                    data.description = `IS THIS A PHOTO OF\n${data.title.slice(16)}\n${data.message}` 
+                    data.description = `IS THIS A PHOTO OF\n${data.title.slice(18)}\n${data.message}` 
 
                     missionInfo = `${data.title}:\n\n"${data.message}"`
                 }
@@ -155,8 +155,6 @@ export default class Main extends React.Component {
             },
             buttonText: {
                 color: this.state.bTextColour,
-                textShadowColor: '#000',
-                textShadowRadius: 10,
                 fontSize: 20,
                 fontWeight: '200',
                 textAlign: "center"
