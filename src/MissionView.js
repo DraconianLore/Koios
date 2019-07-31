@@ -4,6 +4,7 @@ import { BASE_URL } from 'react-native-dotenv';
 import { StyleSheet, View, TextInput, Button, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import PhotoMission from './PhotoMission';
 import VerificationMission from './VerificationMission';
+import MissionComplete from './MissionComplete';
 
 export default class MissionView extends Component {
   constructor(props) {
@@ -14,24 +15,37 @@ export default class MissionView extends Component {
       response: '',
       instructionButton: "VIEW INSTRUCTIONS",
       missionType: props.missionType,
-      missionActive: props.missionActive
+      missionActive: props.missionActive,
+      missionComplete: false
     }
+    this.completeAMission = this.completeAMission.bind(this)
   }
 
   buttonPress = () => {
     const response = axios.patch(`https://koios.herokuapp.com/users/` + this.state.userId + '/missions/verify?message=' + this.state.answer).then(response => {
-      this.setState({
-        response: response.data.message
-      })
-      if (response.data.message === 'MISSION COMPLETE') {
-        // const response = axios.get(`https://koios.herokuapp.com/users/` + userId).then(response => {
-        // })
-        this.props.setMissionComplete()
      
+      if (response.data.message === 'MISSION COMPLETE') {
+        
+        this.setState({ response: response.data.message})
+        setTimeout(() => {
+          this.completeAMission()
+        }, 10);
+        
+      } else {
+        this.setState({
+          response: response.data.message
+        })
       }
     })
   }
   
+  completeAMission = () => {
+    this.setState({
+      missionType: '',
+      missionComplete: true
+    })
+  }
+
   render() {
 
     showInstructions = () => {
@@ -70,8 +84,9 @@ export default class MissionView extends Component {
             color='#730000'
           />
         </ImageBackground>}
-        {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} setMissionComplete={this.props.setMissionComplete} />}
-        {this.state.missionType === 'verification' && <VerificationMission userId={this.props.userId} missionDescription={this.props.missionDescription} vPhoto={this.props.vImage} userId={this.props.userId} setMissionComplete={this.props.setMissionComplete} />}
+        {this.state.missionType === 'photo' && <PhotoMission missionDescription={this.props.missionDescription} userId={this.props.userId} missionInfo={this.props.missionInfo} setMissionComplete={this.completeAMission} />}
+        {this.state.missionType === 'verification' && <VerificationMission userId={this.props.userId} missionDescription={this.props.missionDescription} vPhoto={this.props.vImage} userId={this.props.userId} setMissionComplete={this.completeAMission} />}
+        {this.state.missionComplete && <MissionComplete setMissionComplete={this.props.setMissionComplete} />}
       </View>
 
     )

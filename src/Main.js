@@ -117,12 +117,6 @@ export default class Main extends React.Component {
     setMissionComplete = () => {
         this._swiper.scrollBy(-1)
         this.resetPage()
-        setTimeout(() => {
-            this.setState({
-                missionInfo: 'M I S S I O N  C O M P L E T E',
-                showMission: true,
-            })
-        }, 100);
     }
 
     outOfTime = () => {
