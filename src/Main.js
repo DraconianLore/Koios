@@ -34,7 +34,7 @@ export default class Main extends React.Component {
         this.setMissionComplete = this.setMissionComplete.bind(this)
     }
     checkMissions = () => {
-        const response = axios.get(`https://koios.herokuapp.com/users/` + this.state.userId + '/missions/current').then(response => {
+        const response = axios.get(`${BASE_URL}users/` + this.state.userId + '/missions/current').then(response => {
             data = response.data.message
             this.props.updateExp(response.data.experience)
             this.props.updateRank(response.data.rank)
@@ -105,7 +105,7 @@ export default class Main extends React.Component {
         this.checkMissions();
     }
     updateMissionTo(status) {
-        axios.get(`https://koios.herokuapp.com/users/` + this.state.userId + '/missions/' + status).then(response => {
+        axios.get(`${BASE_URL}users/` + this.state.userId + '/missions/' + status).then(response => {
             // to be or not to be...
         })
     }

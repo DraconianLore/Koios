@@ -22,7 +22,7 @@ export default class MissionView extends Component {
   }
 
   buttonPress = () => {
-    const response = axios.patch(`https://koios.herokuapp.com/users/` + this.state.userId + '/missions/verify?message=' + this.state.answer).then(response => {
+    const response = axios.patch(`${BASE_URL}users/` + this.state.userId + '/missions/verify?message=' + this.state.answer).then(response => {
      
       if (response.data.message === 'MISSION COMPLETE') {
         

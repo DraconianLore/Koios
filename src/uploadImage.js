@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default async function uploadImage(image, user, cb) {
 
-    let URL = `https://koios.herokuapp.com/users/${user}/missions/verify`;
+    let URL = `${BASE_URL}users/${user}/missions/verify`;
  
 
     let uriParts = image.split('.');
