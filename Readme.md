@@ -40,6 +40,8 @@ Clone this repository, and also the backend(link above) if you want to use that 
 ### Front-end:
 
 - run `npm install` to get all required dependancies
+- create a `.env` file in your root directory and add your backend url
+    * BASE_URL=/your backend url/
 - run `npm start` to start the app
 - Download the 'Expo' app on your device
 - scan the QR Code that appears in your terminal(or browser if you prefer)
@@ -48,9 +50,9 @@ Clone this repository, and also the backend(link above) if you want to use that 
 
 - run `bundle install` to get all the required dependancies
 - create a `.env` file in your root directory and add your AWS S3 keys in
- - AWS_ACCESS_KEY_ID=/your key here/
- - AWS_SECRET_ACCESS_KEY=/your key here/
- - AWS_REGION=/your AWS region here/
+    * AWS_ACCESS_KEY_ID=/your key here/
+    * AWS_SECRET_ACCESS_KEY=/your key here/
+    * AWS_REGION=/your AWS region here/
 - run `rails s` to start the server on default ports
  - alternative run `rails s -p /your port here/ -b 0.0.0.0` to run on your preferred port at localhost
 
