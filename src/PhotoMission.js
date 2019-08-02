@@ -85,7 +85,6 @@ export default class PhotoMission extends React.Component {
                         style={styles.cam}
                         ref={camera => this.camera = camera}
                         type={type}
-                        autoFocus={false}
                     />}
                     {this.state.plsWait && <Image style={styles.wait} source={require('../assets/images/loading.gif')}/>}
                     {this.state.uploading && <Image style={styles.wait} source={require('../assets/images/loading.gif')}/>}
